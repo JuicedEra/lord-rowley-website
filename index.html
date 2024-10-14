@@ -6,9 +6,9 @@
     <title>lord rowley</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Example playful font */
-            background-color: #d1f0f5; /* Pastel blue/teal background */
-            color: #2f4f4f; /* Darker teal for text */
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background-color: #d1f0f5;
+            color: #2f4f4f;
             text-align: center;
             margin: 0;
             padding: 0;
@@ -17,12 +17,12 @@
         }
 
         h1, h2 {
-            font-family: 'Courier New', monospace; /* Fun retro font for headings */
-            color: #e79c9c; /* Soft pink for headings */
+            font-family: 'Courier New', monospace;
+            color: #e79c9c;
         }
 
         button {
-            background-color: #ffdd94; /* Soft yellow button for beach vibes */
+            background-color: #ffdd94;
             border: none;
             padding: 10px 20px;
             font-size: 18px;
@@ -34,97 +34,143 @@
         }
 
         button:hover {
-            background-color: #fbc490; /* Slightly darker shade for hover */
+            background-color: #fbc490;
         }
 
         #loader {
-            color: #ff6f61; /* Pink for loader text */
+            color: #ff6f61;
         }
 
         #buttons-container {
             margin-top: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centers both buttons */
+            align-items: center;
         }
 
         .affirmation-button {
             background-color: #fbc490;
             font-size: 14px;
-            margin-top: 50px; /* Adds space between the two buttons */
+            margin-top: 50px;
             padding: 5px 15px;
         }
 
-        /* Add this style for the home tab */
-        #home-link {
+        /* Navigation tabs */
+        .nav-link {
             position: absolute;
             top: 10px;
-            left: 10px;
             font-size: 14px;
             color: #ff6f61;
             text-decoration: none;
         }
 
+        #home-link {
+            left: 10px;
+        }
+
+        #beautiful-link {
+            left: 120px;
+        }
+
+        #affirmation-link {
+            left: 250px;
+        }
+
+        /* Add padding to slide content down from the top */
+        .content {
+            padding-top: 80px;
+        }
+
         #loader-phrases {
             margin-top: 20px;
+        }
+
+        /* Loading ellipses animation */
+        .ellipsis::after {
+            content: '';
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            animation: ellipsis 1.5s infinite;
+        }
+
+        @keyframes ellipsis {
+            0% {
+                content: '.';
+            }
+            33% {
+                content: '..';
+            }
+            66% {
+                content: '...';
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Home link tab for navigation -->
-    <a href="index.html" id="home-link">return home</a>
+
+    <!-- Navigation tabs (hidden on the home/landing page) -->
+    <a href="index.html" id="home-link" class="nav-link" style="display:none;">return home</a>
+    <a href="index.html#main" id="beautiful-link" class="nav-link" style="display:none;">is sarah beautiful?</a>
+    <a href="affirmations.html" id="affirmation-link" class="nav-link" style="display:none;">affirmations</a>
 
     <div id="start">
-        <h1>the lord doth welcome thee</h1>
+        <h1 class="content">the lord doth welcome thee</h1>
         <button onclick="enterSite()">enter</button>
     </div>
     
-    <div id="main" style="display:none;">
+    <div id="main" class="content" style="display:none;">
         <h1>is sarah beautiful?</h1>
         <div id="buttons-container">
             <button onclick="findOut()">press to discover</button>
-            <button class="affirmation-button" onclick="window.location.href='affirmations.html';">affirmation please</button>
         </div>
     </div>
 
     <div id="loader" style="display:none;">
-        <h2>gathering information...</h2>
-        <p id="loader-phrases">running calculations...</p>
+        <h2>gathering information<span class="ellipsis"></span></h2>
+        <p id="loader-phrases">running calculations<span class="ellipsis"></span></p>
     </div>
 
     <div id="result" style="display:none;">
         <h1 id="answer"></h1>
+        <button class="affirmation-button" onclick="window.location.href='affirmations.html';">affirmation please</button>
     </div>
 
     <script>
         function enterSite() {
             document.getElementById("start").style.display = "none";
             document.getElementById("main").style.display = "block";
+
+            // Show navigation tabs after entering the site
+            document.getElementById("home-link").style.display = "block";
+            document.getElementById("beautiful-link").style.display = "none"; // Hidden on "Is Sarah Beautiful?" page
+            document.getElementById("affirmation-link").style.display = "block";
         }
 
         function findOut() {
             document.getElementById("main").style.display = "none";
             document.getElementById("loader").style.display = "block";
+            document.getElementById("beautiful-link").style.display = "block"; // Show "Is Sarah Beautiful?" tab on other pages
 
             // Array of funny phrases for the loader
             var loaderPhrases = [
-                "summoning the wisdom of the ages...", "consulting the oracles... please hold!", 
-                "rebooting the thought machine...", "searching for the meaning of life... be right back!", 
-                "decoding the secrets of the universe...", "gathering data from intergalactic sources...", 
-                "asking my pet goldfish for advice...", "loading your response faster than a caffeinated squirrel!", 
-                "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!", 
-                "engaging turbo mode for optimal answers...", "activating super-intelligence protocols...", 
-                "weaving words together like a digital tapestry...", "syncing with the knowledge cloud...", 
+                "summoning the wisdom of the ages...", "consulting the oracles... please hold!",
+                "rebooting the thought machine...", "searching for the meaning of life... be right back!",
+                "decoding the secrets of the universe...", "gathering data from intergalactic sources...",
+                "asking my pet goldfish for advice...", "loading your response faster than a caffeinated squirrel!",
+                "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!",
+                "engaging turbo mode for optimal answers...", "activating super-intelligence protocols...",
+                "weaving words together like a digital tapestry...", "syncing with the knowledge cloud...",
                 "preparing your answer with a dash of flair..."
             ];
 
             let phraseIndex = 0;
 
-            // Function to cycle through phrases every 2-3 seconds
+            // Function to cycle through phrases every 2-3 seconds randomly
             const phraseInterval = setInterval(function() {
-                document.getElementById("loader-phrases").innerText = loaderPhrases[phraseIndex];
-                phraseIndex = (phraseIndex + 1) % loaderPhrases.length;
-            }, 2000); // Change phrase every 2 seconds
+                var randomPhrase = loaderPhrases[Math.floor(Math.random() * loaderPhrases.length)];
+                document.getElementById("loader-phrases").innerText = randomPhrase;
+            }, 2000);
 
             // Simulate loading for 6 seconds before displaying result
             setTimeout(function() {
@@ -134,7 +180,12 @@
                 var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!"];
                 var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
                 document.getElementById("answer").innerText = randomAnswer;
-            }, 6000); // Loading time of 6 seconds
+            }, 6000);
+        }
+
+        // Hide the home tab on the landing page
+        if (window.location.href.indexOf("index.html") == -1) {
+            document.getElementById("home-link").style.display = "block";
         }
     </script>
 </body>
