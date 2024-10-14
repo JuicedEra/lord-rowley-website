@@ -148,7 +148,7 @@
 
         <div id="start">
             <h1 class="content">the lord doth welcome thee</h1>
-            <button onclick="enterSite()">enter</button>
+            <button id="enterButton">enter</button>
         </div>
         
         <div id="main" class="content">
@@ -187,16 +187,16 @@
             document.getElementById('year').textContent = new Date().getFullYear();
         };
 
-        // Enter the site and show navigation links
-        function enterSite() {
+        // Fix enter button functionality
+        document.getElementById("enterButton").onclick = function() {
             document.getElementById("start").style.display = "none";
             document.getElementById("main").style.display = "block";
             
-            // Show navigation tabs
+            // Show navigation tabs after entering
             document.getElementById("home-link").style.display = "block";
             document.getElementById("beautiful-link").style.display = "block";
             document.getElementById("affirmation-link").style.display = "block";
-        }
+        };
 
         // Find out if Sarah is beautiful and show loader, then result
         function findOut() {
@@ -242,3 +242,6 @@
             var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
             document.getElementById("affirmationText").innerText = randomAffirmation;
         }
+    </script>
+</body>
+</html>
