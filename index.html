@@ -42,17 +42,40 @@
         }
 
         #buttons-container {
-            margin-top: 30px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers both buttons */
         }
 
-        #buttons-container button {
-            margin: 10px 20px; /* This adds space between the buttons */
+        .affirmation-button {
+            background-color: #fbc490;
+            font-size: 14px;
+            margin-top: 50px; /* Adds space between the two buttons */
+            padding: 5px 15px;
+        }
+
+        /* Add this style for the home tab */
+        #home-link {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 14px;
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        #loader-phrases {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <!-- Home link tab for navigation -->
+    <a href="index.html" id="home-link">return home</a>
+
     <div id="start">
-        <h1>the Lord doth welcome thee</h1>
+        <h1>the lord doth welcome thee</h1>
         <button onclick="enterSite()">enter</button>
     </div>
     
@@ -60,13 +83,13 @@
         <h1>is sarah beautiful?</h1>
         <div id="buttons-container">
             <button onclick="findOut()">press to discover</button>
-            <button onclick="window.location.href='affirmations.html';">affirmation please</button>
+            <button class="affirmation-button" onclick="window.location.href='affirmations.html';">affirmation please</button>
         </div>
     </div>
 
     <div id="loader" style="display:none;">
         <h2>gathering information...</h2>
-        <p>running calculations...</p>
+        <p id="loader-phrases">running calculations...</p>
     </div>
 
     <div id="result" style="display:none;">
@@ -83,13 +106,35 @@
             document.getElementById("main").style.display = "none";
             document.getElementById("loader").style.display = "block";
 
+            // Array of funny phrases for the loader
+            var loaderPhrases = [
+                "summoning the wisdom of the ages...", "consulting the oracles... please hold!", 
+                "rebooting the thought machine...", "searching for the meaning of life... be right back!", 
+                "decoding the secrets of the universe...", "gathering data from intergalactic sources...", 
+                "asking my pet goldfish for advice...", "loading your response faster than a caffeinated squirrel!", 
+                "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!", 
+                "engaging turbo mode for optimal answers...", "activating super-intelligence protocols...", 
+                "weaving words together like a digital tapestry...", "syncing with the knowledge cloud...", 
+                "preparing your answer with a dash of flair..."
+            ];
+
+            let phraseIndex = 0;
+
+            // Function to cycle through phrases every 2-3 seconds
+            const phraseInterval = setInterval(function() {
+                document.getElementById("loader-phrases").innerText = loaderPhrases[phraseIndex];
+                phraseIndex = (phraseIndex + 1) % loaderPhrases.length;
+            }, 2000); // Change phrase every 2 seconds
+
+            // Simulate loading for 6 seconds before displaying result
             setTimeout(function() {
+                clearInterval(phraseInterval);
                 document.getElementById("loader").style.display = "none";
                 document.getElementById("result").style.display = "block";
                 var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!"];
                 var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
                 document.getElementById("answer").innerText = randomAnswer;
-            }, 3000);
+            }, 6000); // Loading time of 6 seconds
         }
     </script>
 </body>
