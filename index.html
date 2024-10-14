@@ -3,44 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>is sarah beautiful?</title>
+    <title>Is Sarah Beautiful?</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Example playful font */
+            background-color: #d1f0f5; /* Pastel blue/teal background */
+            color: #2f4f4f; /* Darker teal for text */
             text-align: center;
-            margin-top: 20%;
+            margin: 0;
+            padding: 0;
+            font-size: 16px;
+            text-transform: lowercase;
         }
-        #main, #result {
-            display: none;
+
+        h1, h2 {
+            font-family: 'Courier New', monospace; /* Fun retro font for headings */
+            color: #e79c9c; /* Soft pink for headings */
         }
+
+        button {
+            background-color: #ffdd94; /* Soft yellow button for beach vibes */
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 10px;
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            text-transform: lowercase;
+        }
+
+        button:hover {
+            background-color: #fbc490; /* Slightly darker shade for hover */
+        }
+
         #loader {
-            display: none;
+            color: #ff6f61; /* Pink for loader text */
+        }
+
+        #buttons-container {
+            margin-top: 30px;
+        }
+
+        #buttons-container button {
+            margin: 10px 20px; /* This adds space between the buttons */
         }
     </style>
 </head>
 <body>
     <div id="start">
-        <button onclick="enterSite()">Enter</button>
+        <h1>welcome!</h1>
+        <button onclick="enterSite()">enter</button>
     </div>
     
-    <div id="main">
-        <h1>is sarah beautiful?</h1>
-        <button onclick="findOut()">Press to Find Out</button>
+    <div id="main" style="display:none;">
+        <h1>is sarah beautiful</h1>
+        <div id="buttons-container">
+            <button onclick="findOut()">press to find out</button>
+            <button onclick="window.location.href='affirmations.html';">affirmation please</button>
+        </div>
     </div>
 
-    <div id="loader">
-        <h2>Gathering information...</h2>
-        <p>Running calculations...</p>
+    <div id="loader" style="display:none;">
+        <h2>gathering information...</h2>
+        <p>running calculations...</p>
     </div>
 
-    <div id="result">
+    <div id="result" style="display:none;">
         <h1 id="answer"></h1>
     </div>
-
-    <!-- Button to navigate to affirmations page -->
-    <button onclick="window.location.href='affirmations.html';" style="background-color: #ffdd94; padding: 10px 20px; font-size: 18px; color: #fff; border-radius: 10px; border: none; cursor: pointer;">
-        check out affirmations
-    </button>
 
     <script>
         function enterSite() {
@@ -55,7 +86,7 @@
             setTimeout(function() {
                 document.getElementById("loader").style.display = "none";
                 document.getElementById("result").style.display = "block";
-                var answers = ["Of course!", "Absolutely!", "Duh!", "Yup!", "Always!", "No doubt!", "Don't be a dummy!"];
+                var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!"];
                 var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
                 document.getElementById("answer").innerText = randomAnswer;
             }, 3000);
