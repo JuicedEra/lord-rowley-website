@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Sarah Beautiful?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20%;
+        }
+        #main, #result {
+            display: none;
+        }
+        #loader {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="start">
+        <h1>Welcome!</h1>
+        <button onclick="enterSite()">Enter</button>
+    </div>
+    
+    <div id="main">
+        <h1>Is Sarah Beautiful Today?</h1>
+        <button onclick="findOut()">Press to Find Out</button>
+    </div>
+
+    <div id="loader">
+        <h2>Gathering information...</h2>
+        <p>Running calculations...</p>
+    </div>
+
+    <div id="result">
+        <h1 id="answer"></h1>
+    </div>
+
+    <script>
+        function enterSite() {
+            document.getElementById("start").style.display = "none";
+            document.getElementById("main").style.display = "block";
+        }
+
+        function findOut() {
+            document.getElementById("main").style.display = "none";
+            document.getElementById("loader").style.display = "block";
+
+            setTimeout(function() {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("result").style.display = "block";
+                var answers = ["Of course!", "Absolutely!", "Duh!", "Yup!", "Always!", "No doubt!", "Don't be a dummy!"];
+                var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
+                document.getElementById("answer").innerText = randomAnswer;
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
