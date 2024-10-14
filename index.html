@@ -74,11 +74,11 @@
         }
 
         #beautiful-link {
-            left: 120px;
+            left: calc(50% - 120px); /* Centers the tab */
         }
 
         #affirmation-link {
-            left: 250px;
+            left: calc(50% + 20px); /* Spaced equidistant from the 'Is Sarah Beautiful?' tab */
         }
 
         /* Centering text lower on the page */
@@ -118,48 +118,63 @@
             text-align: center;
             padding-bottom: 20px;
         }
+
+        /* Ensure copyright is at the bottom of the screen */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        /* Move the enter button further down */
+        #start {
+            padding-top: 250px; /* Moves the enter button lower */
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navigation tabs (visible on all pages) -->
-    <a href="index.html" id="home-link" class="nav-link" style="display:none;">return home</a>
-    <a href="index.html#main" id="beautiful-link" class="nav-link">is sarah beautiful?</a>
-    <a href="index.html#affirmations" id="affirmation-link" class="nav-link" style="display:none;">affirmations</a>
+    <div class="page-wrapper">
+        <!-- Navigation tabs (hidden on the home/landing page) -->
+        <a href="index.html" id="home-link" class="nav-link" style="display:none;">return home</a>
+        <a href="#main" id="beautiful-link" class="nav-link" style="display:none;">is sarah beautiful?</a>
+        <a href="#affirmations" id="affirmation-link" class="nav-link" style="display:none;">affirmations</a>
 
-    <div id="start">
-        <h1 class="content">the lord doth welcome thee</h1>
-        <button onclick="enterSite()">enter</button>
-    </div>
-    
-    <div id="main" class="content" style="display:none;">
-        <h1>is sarah beautiful?</h1>
-        <div id="buttons-container">
-            <button onclick="findOut()">press to discover</button>
+        <div id="start">
+            <h1 class="content">the lord doth welcome thee</h1>
+            <button onclick="enterSite()">enter</button>
         </div>
-    </div>
+        
+        <div id="main" class="content" style="display:none;">
+            <h1>is sarah beautiful?</h1>
+            <div id="buttons-container">
+                <button onclick="findOut()">press to discover</button>
+            </div>
+        </div>
 
-    <div id="loader" style="display:none;">
-        <h2>gathering information<span class="ellipsis"></span></h2>
-        <p id="loader-phrases">running calculations<span class="ellipsis"></span></p>
-    </div>
+        <div id="loader" style="display:none;">
+            <h2>gathering information<span class="ellipsis"></span></h2>
+            <p id="loader-phrases">running calculations<span class="ellipsis"></span></p>
+        </div>
 
-    <div id="result" class="content" style="display:none;">
-        <h1 id="answer"></h1>
-        <button class="affirmation-button" onclick="showAffirmations()">affirmation please</button>
-    </div>
+        <div id="result" class="content" style="display:none;">
+            <h1 id="answer"></h1>
+            <button class="affirmation-button" onclick="showAffirmations()">affirmation please</button>
+        </div>
 
-    <!-- Affirmations section (merged into index.html) -->
-    <div id="affirmations" class="content" style="display:none;">
-        <h1>slap for some love</h1>
-        <button id="slapButton">slap here</button>
-        <div id="affirmationText"></div>
-    </div>
+        <!-- Affirmations section -->
+        <div id="affirmations" class="content" style="display:none;">
+            <h1>slap for some love</h1>
+            <button id="slapButton">slap here</button>
+            <div id="affirmationText"></div>
+        </div>
 
-    <!-- Copyright footer -->
-    <footer>
-        © <span id="year"></span>, lord rowley inc. all rights reserved.
-    </footer>
+        <!-- Copyright footer -->
+        <footer>
+            © <span id="year"></span>, lord rowley inc. all rights reserved.
+        </footer>
+    </div>
 
     <script>
         // Update copyright year dynamically
@@ -179,14 +194,6 @@
             document.getElementById("main").style.display = "none";
             document.getElementById("loader").style.display = "block";
 
-            // Array of fun responses
-            var answers = [
-                "of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", 
-                "don't be a dummy!", "she's glowing today!", "are you even serious?", 
-                "you betcha!", "like, duh!", "without a doubt!", "so true!", "psh, obviously!",
-                "does the sun rise?", "not even a question!"
-            ];
-
             let phraseIndex = 0;
             const phraseInterval = setInterval(function() {
                 var randomPhrase = [
@@ -203,6 +210,7 @@
                 clearInterval(phraseInterval);
                 document.getElementById("loader").style.display = "none";
                 document.getElementById("result").style.display = "block";
+                var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!"];
                 var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
                 document.getElementById("answer").innerText = randomAnswer;
             }, 6000);
@@ -221,13 +229,4 @@
             ];
 
             var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
-            document.getElementById("affirmationText").innerText = randomAffirmation;
-        }
-
-        // Hide the home tab on the landing page
-        if (window.location.href.indexOf("index.html") == -1) {
-            document.getElementById("home-link").style.display = "block";
-        }
-    </script>
-</body>
-</html
+            document.getElementById("affirmationText").innerText = randomAff
