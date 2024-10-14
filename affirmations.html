@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is Sarah Beautiful?</title>
+    <title>Affirmations</title>
     <style>
     body {
         font-family: 'Comic Sans MS', 'Arial', sans-serif; /* Example playful font */
@@ -37,10 +37,6 @@
         background-color: #fbc490; /* Slightly darker shade for hover */
     }
 
-    #loader {
-        color: #ff6f61; /* Pink for loader text */
-    }
-
     #affirmationText {
         margin-top: 20px;
         font-family: 'Courier New', monospace;
@@ -66,58 +62,10 @@
     body, button, input {
         cursor: url('path-to-hand-emoji-cursor.png'), auto;
     }
-</style>
+    </style>
 </head>
 <body>
-    <div id="start">
-        <h1>Welcome!</h1>
-        <button onclick="enterSite()">Enter</button>
-    </div>
-    
-    <div id="main">
-        <h1>Is Sarah Beautiful Today?</h1>
-        <button onclick="findOut()">Press to Find Out</button>
-    </div>
 
-    <div id="loader">
-        <h2>Gathering information...</h2>
-        <p>Running calculations...</p>
-    </div>
-
-    <div id="result">
-        <h1 id="answer"></h1>
-    </div>
-
-    <script>
-        function enterSite() {
-            document.getElementById("start").style.display = "none";
-            document.getElementById("main").style.display = "block";
-        }
-
-        function findOut() {
-    document.getElementById("main").style.display = "none";
-    document.getElementById("loader").style.display = "block";
-
-    setTimeout(function() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("result").style.display = "block";
-        var answers = [
-            "of course!", "obviously!", "duh!", "you betcha!", 
-            "like, always", "psh, absolutely", "without question!", 
-            "beyond a doubt", "100%", "hands down", "uh, yeah", 
-            "every single time", "as if you need to ask!", "no brainer!", 
-            "so true!", "you already know", "just look at her", 
-            "clearly", "totally!", "heck yes!", "like the sky’s blue", 
-            "every second of every day", "you know it!", "what a question!"
-        ];
-        var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
-        document.getElementById("answer").innerText = randomAnswer;
-    }, 3000); // 3 seconds to simulate data loading
-}
-    </script>
-</body>
-</html>
-<div id="affirmations" style="display:none;">
     <h1>slap for some love</h1>
     <button id="slapButton">
         <!-- Add your cartoon butt graphic as the button's background image -->
@@ -126,25 +74,30 @@
     <div id="affirmationText">
         <!-- This is where the random affirmations will appear -->
     </div>
-</div>
-document.getElementById("slapButton").addEventListener("click", function() {
-    var affirmations = [
-        "you bring light to everyone around you", "you make the world a better place", 
-        "someone is grateful for you today", "you are enough just as you are", 
-        "your kindness is contagious", "you’re a wonderful friend", 
-        "never stop being you", "you’re stronger than you know", 
-        "you inspire people without even trying", "you’re loved, deeply", 
-        "the best is yet to come", "you deserve all the good things", 
-        "keep pushing, you’re almost there", "your heart is pure gold", 
-        "you're doing great, keep going!", "you have a beautiful soul", 
-        "your smile is pure magic", "the world is better with you in it", 
-        "every day, you get better and better", "you’ve got this!", 
-        "don’t forget how amazing you are", "you are loved beyond measure", 
-        "you’re a ray of sunshine in a cloudy world", "you bring out the best in others", 
-        "keep spreading your magic", "you’re capable of great things", 
-        "your energy is infectious", "you’re unstoppable!", "you are a gift to this world", 
-        "you’ve got a heart of gold", "your presence is powerful", "you are a dream come true"
-    ];
-    var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
-    document.getElementById("affirmationText").innerText = randomAffirmation;
-});
+
+    <script>
+        document.getElementById("slapButton").addEventListener("click", function() {
+            var affirmations = [
+                "you bring light to everyone around you", "you make the world a better place", 
+                "someone is grateful for you today", "you are enough just as you are", 
+                "your kindness is contagious", "you’re a wonderful friend", 
+                "never stop being you", "you’re stronger than you know", 
+                "you inspire people without even trying", "you’re loved, deeply", 
+                "the best is yet to come", "you deserve all the good things", 
+                "keep pushing, you’re almost there", "your heart is pure gold", 
+                "you're doing great, keep going!", "you have a beautiful soul", 
+                "your smile is pure magic", "the world is better with you in it", 
+                "every day, you get better and better", "you’ve got this!", 
+                "don’t forget how amazing you are", "you are loved beyond measure", 
+                "you’re a ray of sunshine in a cloudy world", "you bring out the best in others", 
+                "keep spreading your magic", "you’re capable of great things", 
+                "your energy is infectious", "you’re unstoppable!", "you are a gift to this world", 
+                "you’ve got a heart of gold", "your presence is powerful", "you are a dream come true"
+            ];
+            var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+            document.getElementById("affirmationText").innerText = randomAffirmation;
+        });
+    </script>
+
+</body>
+</html>
