@@ -42,7 +42,7 @@
         }
 
         #buttons-container {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -55,13 +55,18 @@
             padding: 5px 15px;
         }
 
-        /* Navigation tabs */
+        /* Navigation tabs with box styling */
         .nav-link {
             position: absolute;
             top: 10px;
             font-size: 14px;
             color: #ff6f61;
             text-decoration: none;
+            border: 1px solid #ff6f61;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         #home-link {
@@ -76,9 +81,9 @@
             left: 250px;
         }
 
-        /* Add padding to slide content down from the top */
+        /* Centering text lower on the page */
         .content {
-            padding-top: 80px;
+            padding-top: 150px;
         }
 
         #loader-phrases {
@@ -105,14 +110,22 @@
                 content: '...';
             }
         }
+
+        /* Copyright styling */
+        footer {
+            font-size: 12px;
+            color: #a0a0a0;
+            text-align: center;
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navigation tabs (hidden on the home/landing page) -->
+    <!-- Navigation tabs (visible on all pages) -->
     <a href="index.html" id="home-link" class="nav-link" style="display:none;">return home</a>
-    <a href="index.html#main" id="beautiful-link" class="nav-link" style="display:none;">is sarah beautiful?</a>
-    <a href="affirmations.html" id="affirmation-link" class="nav-link" style="display:none;">affirmations</a>
+    <a href="index.html#main" id="beautiful-link" class="nav-link">is sarah beautiful?</a>
+    <a href="index.html#affirmations" id="affirmation-link" class="nav-link" style="display:none;">affirmations</a>
 
     <div id="start">
         <h1 class="content">the lord doth welcome thee</h1>
@@ -131,56 +144,84 @@
         <p id="loader-phrases">running calculations<span class="ellipsis"></span></p>
     </div>
 
-    <div id="result" style="display:none;">
+    <div id="result" class="content" style="display:none;">
         <h1 id="answer"></h1>
-        <button class="affirmation-button" onclick="window.location.href='affirmations.html';">affirmation please</button>
+        <button class="affirmation-button" onclick="showAffirmations()">affirmation please</button>
     </div>
 
+    <!-- Affirmations section (merged into index.html) -->
+    <div id="affirmations" class="content" style="display:none;">
+        <h1>slap for some love</h1>
+        <button id="slapButton">slap here</button>
+        <div id="affirmationText"></div>
+    </div>
+
+    <!-- Copyright footer -->
+    <footer>
+        © <span id="year"></span>, lord rowley inc. all rights reserved.
+    </footer>
+
     <script>
+        // Update copyright year dynamically
+        document.getElementById('year').textContent = new Date().getFullYear();
+
         function enterSite() {
             document.getElementById("start").style.display = "none";
             document.getElementById("main").style.display = "block";
 
             // Show navigation tabs after entering the site
             document.getElementById("home-link").style.display = "block";
-            document.getElementById("beautiful-link").style.display = "none"; // Hidden on "Is Sarah Beautiful?" page
+            document.getElementById("beautiful-link").style.display = "block";
             document.getElementById("affirmation-link").style.display = "block";
         }
 
         function findOut() {
             document.getElementById("main").style.display = "none";
             document.getElementById("loader").style.display = "block";
-            document.getElementById("beautiful-link").style.display = "block"; // Show "Is Sarah Beautiful?" tab on other pages
 
-            // Array of funny phrases for the loader
-            var loaderPhrases = [
-                "summoning the wisdom of the ages...", "consulting the oracles... please hold!",
-                "rebooting the thought machine...", "searching for the meaning of life... be right back!",
-                "decoding the secrets of the universe...", "gathering data from intergalactic sources...",
-                "asking my pet goldfish for advice...", "loading your response faster than a caffeinated squirrel!",
-                "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!",
-                "engaging turbo mode for optimal answers...", "activating super-intelligence protocols...",
-                "weaving words together like a digital tapestry...", "syncing with the knowledge cloud...",
-                "preparing your answer with a dash of flair..."
+            // Array of fun responses
+            var answers = [
+                "of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", 
+                "don't be a dummy!", "she's glowing today!", "are you even serious?", 
+                "you betcha!", "like, duh!", "without a doubt!", "so true!", "psh, obviously!",
+                "does the sun rise?", "not even a question!"
             ];
 
             let phraseIndex = 0;
-
-            // Function to cycle through phrases every 2-3 seconds randomly
             const phraseInterval = setInterval(function() {
-                var randomPhrase = loaderPhrases[Math.floor(Math.random() * loaderPhrases.length)];
+                var randomPhrase = [
+                    "summoning the wisdom of the ages...", "consulting the oracles... please hold!",
+                    "rebooting the thought machine...", "searching for the meaning of life... be right back!",
+                    "decoding the secrets of the universe...", "gathering data from intergalactic sources...",
+                    "asking my pet goldfish for advice...", "loading your response faster than a caffeinated squirrel!",
+                    "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!"
+                ][Math.floor(Math.random() * 10)];
                 document.getElementById("loader-phrases").innerText = randomPhrase;
             }, 2000);
 
-            // Simulate loading for 6 seconds before displaying result
             setTimeout(function() {
                 clearInterval(phraseInterval);
                 document.getElementById("loader").style.display = "none";
                 document.getElementById("result").style.display = "block";
-                var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!"];
                 var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
                 document.getElementById("answer").innerText = randomAnswer;
             }, 6000);
+        }
+
+        function showAffirmations() {
+            document.getElementById("result").style.display = "none";
+            document.getElementById("affirmations").style.display = "block";
+
+            var affirmations = [
+                "you're doing amazing, sweetie", "you bring light to everyone around you", 
+                "someone is grateful for you today", "you are enough just as you are", 
+                "your kindness is contagious", "you inspire people without even trying", 
+                "keep shining, you're a star", "you've got this!", "you're loved deeply", 
+                "you're stronger than you know", "the best is yet to come!"
+            ];
+
+            var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+            document.getElementById("affirmationText").innerText = randomAffirmation;
         }
 
         // Hide the home tab on the landing page
@@ -189,4 +230,4 @@
         }
     </script>
 </body>
-</html>
+</html
