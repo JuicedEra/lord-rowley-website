@@ -183,12 +183,12 @@
 
     <script>
         // Update copyright year dynamically
-        window.onload = function() {
+        window.addEventListener('DOMContentLoaded', (event) => {
             document.getElementById('year').textContent = new Date().getFullYear();
-        };
+        });
 
         // Fix enter button functionality
-        document.getElementById("enterButton").onclick = function() {
+        document.getElementById("enterButton").addEventListener('click', function() {
             document.getElementById("start").style.display = "none";
             document.getElementById("main").style.display = "block";
             
@@ -196,7 +196,7 @@
             document.getElementById("home-link").style.display = "block";
             document.getElementById("beautiful-link").style.display = "block";
             document.getElementById("affirmation-link").style.display = "block";
-        };
+        });
 
         // Find out if Sarah is beautiful and show loader, then result
         function findOut() {
