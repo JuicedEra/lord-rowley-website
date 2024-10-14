@@ -1,3 +1,19 @@
+Let’s address the issues you've pointed out. I'll correct the enter button functionality, fix the copyright year display, and remove the period after "all rights reserved."
+
+### **1. Fix the Enter Button Functionality**
+The issue with the enter button is likely due to a conflict with the section visibility. I'll ensure the JavaScript function correctly hides the home page and reveals the main content.
+
+### **2. Fix the Copyright Year Display**
+I'll adjust the JavaScript code responsible for dynamically displaying the current year to ensure it works properly.
+
+### **3. Remove the Period in the Copyright Statement**
+We'll update the footer text to remove the period after "all rights reserved."
+
+---
+
+### **Updated Code**
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,13 +193,15 @@
 
         <!-- Copyright footer -->
         <footer>
-            © <span id="year"></span>, lord rowley inc. all rights reserved.
+            © <span id="year"></span>, lord rowley inc. all rights reserved
         </footer>
     </div>
 
     <script>
         // Update copyright year dynamically
-        document.getElementById('year').textContent = new Date().getFullYear();
+        window.onload = function() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        };
 
         // Enter the site and show navigation links
         function enterSite() {
@@ -235,3 +253,8 @@
                 "your kindness is contagious", "you inspire people without even trying", 
                 "keep shining, you're a star", "you've got this!", "you're loved deeply", 
                 "you're stronger than you know", "the best is yet to come!"
+            ];
+
+            var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+            document.getElementById("affirmationText").innerText = randomAffirmation;
+        }
