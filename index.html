@@ -131,6 +131,11 @@
         #start {
             padding-top: 250px; /* Moves the enter button lower */
         }
+
+        /* Hide all sections except the home page by default */
+        #main, #loader, #result, #affirmations {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -146,25 +151,25 @@
             <button onclick="enterSite()">enter</button>
         </div>
         
-        <div id="main" class="content" style="display:none;">
+        <div id="main" class="content">
             <h1>is sarah beautiful?</h1>
             <div id="buttons-container">
                 <button onclick="findOut()">press to discover</button>
             </div>
         </div>
 
-        <div id="loader" style="display:none;">
+        <div id="loader">
             <h2>gathering information<span class="ellipsis"></span></h2>
             <p id="loader-phrases">running calculations<span class="ellipsis"></span></p>
         </div>
 
-        <div id="result" class="content" style="display:none;">
+        <div id="result" class="content">
             <h1 id="answer"></h1>
             <button class="affirmation-button" onclick="showAffirmations()">affirmation please</button>
         </div>
 
         <!-- Affirmations section -->
-        <div id="affirmations" class="content" style="display:none;">
+        <div id="affirmations" class="content">
             <h1>slap for some love</h1>
             <button id="slapButton">slap here</button>
             <div id="affirmationText"></div>
@@ -180,16 +185,18 @@
         // Update copyright year dynamically
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        // Enter the site and show navigation links
         function enterSite() {
             document.getElementById("start").style.display = "none";
             document.getElementById("main").style.display = "block";
-
-            // Show navigation tabs after entering the site
+            
+            // Show navigation tabs
             document.getElementById("home-link").style.display = "block";
             document.getElementById("beautiful-link").style.display = "block";
             document.getElementById("affirmation-link").style.display = "block";
         }
 
+        // Find out if Sarah is beautiful and show loader, then result
         function findOut() {
             document.getElementById("main").style.display = "none";
             document.getElementById("loader").style.display = "block";
@@ -206,6 +213,7 @@
                 document.getElementById("loader-phrases").innerText = randomPhrase;
             }, 2000);
 
+            // Simulate loading for 6 seconds before showing result
             setTimeout(function() {
                 clearInterval(phraseInterval);
                 document.getElementById("loader").style.display = "none";
@@ -216,6 +224,7 @@
             }, 6000);
         }
 
+        // Show affirmations section after clicking "affirmation please"
         function showAffirmations() {
             document.getElementById("result").style.display = "none";
             document.getElementById("affirmations").style.display = "block";
@@ -226,7 +235,3 @@
                 "your kindness is contagious", "you inspire people without even trying", 
                 "keep shining, you're a star", "you've got this!", "you're loved deeply", 
                 "you're stronger than you know", "the best is yet to come!"
-            ];
-
-            var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
-            document.getElementById("affirmationText").innerText = randomAff
