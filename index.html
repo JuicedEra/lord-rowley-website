@@ -42,10 +42,11 @@
             display: none;
         }
 
-        /* Styling for "Is Sarah Beautiful?" question text */
+        /* Adjusting the "Is Sarah Beautiful?" text */
         #result-question {
-            font-size: 3.5em; /* Larger size for "Is Sarah Beautiful?" */
+            font-size: 2.5em; /* Closer to the original size */
             color: #e79c9c; /* Pink color for the question */
+            margin-top: 150px; /* Moving the text slightly higher */
         }
 
         /* Styling for the generated response text */
@@ -62,13 +63,7 @@
             height: 150px;
             border: none;
             border-radius: 50%;
-            cursor: pointer;
             margin-top: 30px;
-        }
-
-        /* Cursor as hand emoji */
-        #slapButton:hover {
-            cursor: url('path-to-hand-emoji.png'), auto;
         }
 
         /* Navigation tabs */
@@ -148,16 +143,17 @@
 
         /* Affirmation text styling */
         #affirmationText {
-            margin-top: 20px; /* Moved closer to the button */
+            margin: 20px auto; /* Increase side margins */
             font-family: 'Courier New', monospace;
             font-size: 24px;
             color: #4072e6;
+            max-width: 90%; /* Ensure affirmations stay well within screen */
         }
 
         /* Mobile adjustments for better centering */
         @media (max-width: 768px) {
             #affirmationText {
-                margin-top: 20px; /* Slightly higher margin for mobile */
+                margin: 20px auto; /* Additional margin for mobile */
             }
         }
     </style>
@@ -237,6 +233,15 @@
             }
         }
 
+        // Hide tabs on the initial load of the home page
+        window.onload = function() {
+            if (window.location.pathname === '/') {
+                document.getElementById("home-link").style.display = "none";
+                document.getElementById("beautiful-link").style.display = "none";
+                document.getElementById("affirmation-link").style.display = "none";
+            }
+        };
+
         // Handle enter button
         document.getElementById("enterButton").addEventListener("click", function() {
             showSection("main");
@@ -253,7 +258,27 @@
                     "rebooting the thought machine...", "searching for the meaning of life... be right back!",
                     "decoding the secrets of the universe...", "gathering data from intergalactic sources...",
                     "asking my pet goldfish for advice...", "loading your response faster than a caffeinated squirrel!",
-                    "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!"
+                    "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!", "communing with the sages of old...",
+                    "aligning the stars for clarity...", "consulting the ancient scrolls...", "gathering cosmic wisdom... one moment!", "calling upon the spirit of Einstein...",
+                    "unlocking the vault of hidden truths...", "whispering to the universe... please wait!", "conducting a symphony of brain cells...",
+                    "transmitting signals to the mothership...", "asking a wise owl for insight...", "downloading wisdom from the cloud... almost there!",
+                    "tapping into the matrix for answers...", "running diagnostics on reality...", "firing up the quantum processor...",
+                    "decoding the mysteries of the cosmos...", "cross-referencing with parallel universes...", "mapping out the multiverse... stay tuned!",
+                    "consulting a council of wizards...", "enlightening neurons at lightning speed...", "seeking advice from my magic eight-ball...",
+                    "uploading wisdom from another dimension...", "asking a fortune cookie for clues...", "building a bridge between worlds...",
+                    "analyzing patterns in the space-time continuum...", "unlocking the mysteries of life itself...", "divining the answer from the stars...",
+                    "probing the depths of existence... please hold!", "invoking the ancient spirits of wisdom...", "rebooting the universal mainframe...",
+                    "programming the code of enlightenment...", "turning jeans to some jorts", "be patient lil bitch ass", 
+                    "summoning yon ancient spirits... hold fast!", "fetching answers from the realm of dragons...", "consulting the village bard... one moment!",
+                    "mixing potions of knowledge... nearly done!", "gathering scrolls from the royal archives...", "seeking wisdom from the court jester...",
+                    "whispering to the winds of destiny...", "summoning the knights of knowledge... prepare thyself!", "unlocking the royal vault of truths...",
+                    "tuning into the celestial choir... verily!", "inquiring of the wise old tortoise...", "retrieving visions from the crystal ball...",
+                    "scouring the enchanted forest for answers...", "awakening the ancient oracle... patience, good sir!", "consulting the stars of yore...",
+                    "calling upon Merlin’s wisdom... just a moment!", "questing for the grail of knowledge...", "communing with the fairies of insight...",
+                    "seeking counsel from the royal owl...", "gathering insights from the mists of Avalon...", "scrying the fates with utmost care...",
+                    "translating runes of olde... almost done!", "reading tea leaves of destiny...", "asking a passing knight for a boon...",
+                    "taming the dragons of knowledge... brace thyself!", "wielding the sword of truth... await the outcome!", "beseeching the heavens for guidance...",
+                    "conversing with the court wizard...", "spinning the web of fate... soon, good traveler!", "speaking to the stars... hold thou patience!"
                 ][Math.floor(Math.random() * 10)];
                 document.getElementById("loader-phrases").innerText = randomPhrase;
             }, 2000);
@@ -262,7 +287,17 @@
             setTimeout(function() {
                 clearInterval(phraseInterval);
                 showSection("result");
-                var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!"];
+                var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!", "you bet!", "heck yeah!", "without a doubt",
+                "no question!", "the most beautiful", "as if you had to ask", "definitely!", "you already know, hoe", "no question", "for sure!", "why wouldn't she be?", "like always", 
+                    "100%! ", "it's a given!", "uh, yeah", "beyond any doubt!", "more than ever!", "couldn't be otherwise!", "all day, every day!", "it's obvious!", 
+                    "oh, absolutely!", "mhm, what else is new?", "yes, yes, and yes again!", "true story!", "just look at her!", "like, obviously!", "you know it!", 
+                    "how could she not be?", "beautiful as always!", "every single day!", "she's stunning", "'S' for shut up bc yes she is", 
+                    "roses are red, violets are blue, the lord is beautiful, and sarah is too", "yes. stinky and so beautiful", "inside and out", "everybody shut up in this whole continent", 
+                    "verily, she is!", "aye, without question!", "indeed, it be true!", "by my troth, yes!", "forsooth, it is known!", "beyond all doubt!", "aye, as the sun doth rise!",
+                    "truly, she is fair!", "’tis certain, no doubt!", "yea, ever and always!", "without fail, she doth shine!", "by the heavens, she is!", "indeed, ’tis so!",
+                    "by my honour, yes!", "verily, it is so!", "forsooth, there be no doubt!", "aye, by all accounts!", "indeed, as always!", "as sure as night follows day!",
+                    "yea, as sure as the dawn!", "by all the stars, she is!", "truly, it is beyond dispute!", "aye, and ever shall be!", "indeed, by all that's holy!", "without question, it is known!",
+                    "aye, she is as the fairest flower!", "by the saints, she is ever fair!", "forsooth, as beautiful as ever!", "indeed, it hath been decreed!", "verily, she is most radiant!"];
                 var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
                 document.getElementById("answer").innerText = randomAnswer;
             }, 6000);
@@ -279,8 +314,19 @@
             var affirmations = [
                 "you bring light to everyone around you", "you make the world a better place", 
                 "someone is grateful for you today", "you are enough just as you are", 
-                "your kindness is contagious", "you’re a wonderful friend"
-            ];
+                "your kindness is contagious", "you’re a wonderful friend", 
+                "you are the reason flowers bloom", "your laugh could power a thousand suns", "you’re sweeter than a honeycomb", "the lord smiles upon your every step",
+                "your heart shines brighter than the stars", "verily, thou art a treasure to behold", "the universe dances in your presence", "your smile is pure magic",
+                "someone out there loves you like crazy", "you make every moment brighter", "yea, thou art a beacon of light!", "your beauty could start a renaissance",
+                "you’re funnier than a barrel of monkeys", "you are a blessing in human form", "the lord hath made thee with extra love", "even the clouds envy your softness",
+                "you warm the hearts of everyone near", "thy kindness doth echo through the ages", "you are more dazzling than a sunrise", "you’re the hero of someone’s story",
+                "you make the world a cozier place", "by my troth, thou art splendid", "even the stars blush when they see you", "you could charm the socks off a dragon",
+                "you’re cuter than a puppy in a teacup", "the lord gaveth you all the sparkle", "you make Mondays feel like Fridays", "your soul doth shine like pure gold",
+                "everyone you meet is better for it", "you’re the missing puzzle piece", "in all of creation, none are as wonderful as you", "you could tame the wildest heart",
+                "your giggle is more precious than diamonds", "you bringeth joy wherever thou dost tread", "your kindness is a gift to the world", "you’re a burst of sunshine on a rainy day",
+                "the lord doth beam with pride over you", "your presence could calm the fiercest storm", "you make hearts flutter like butterflies", "the world is brighter with you in it",
+                "you’re as rare as a unicorn", "verily, thy soul is pure as the heavens", "you light up rooms just by being you", "the lord hath bestowed thee with grace"
+                ];
             var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
             document.getElementById("affirmationText").innerText = randomAffirmation;
         });
