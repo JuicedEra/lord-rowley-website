@@ -37,25 +37,29 @@
             background-color: #fbc490;
         }
 
-        #loader, #result, #affirmations {
-            color: #4072e6; /* Updated to blue */
+        /* Hide sections by default */
+        #main, #affirmations, #loader, #result {
+            display: none;
         }
 
-        #buttons-container {
+        /* Style for the butt button */
+        #slapButton {
+            background: url('path-to-butt-image.jpg') no-repeat center center;
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
             margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        .affirmation-button {
-            background-color: #fbc490;
-            font-size: 14px;
-            margin-top: 50px;
-            padding: 5px 15px;
+        /* Cursor as hand emoji */
+        #slapButton:hover {
+            cursor: url('path-to-hand-emoji.png'), auto;
         }
 
-        /* Navigation tabs with increased spacing */
+        /* Navigation tabs */
         .nav-link {
             position: absolute;
             top: 10px;
@@ -69,30 +73,19 @@
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* Move tabs with more lateral spacing */
         #home-link {
             left: 10px;
         }
 
         #beautiful-link {
-            left: 120px; /* Increase spacing */
+            left: 120px;
         }
 
         #affirmation-link {
-            left: 280px; /* Increase spacing */
+            left: 280px;
         }
 
-        /* Centering content lower on pages */
-        .content {
-            padding-top: 200px; /* Lowered vertical padding */
-        }
-
-        #loader-phrases {
-            margin-top: 20px;
-            color: #4072e6; /* Updated to blue */
-        }
-
-        /* Loading ellipses animation */
+        /* Ellipsis animation */
         .ellipsis::after {
             content: '';
             display: inline-block;
@@ -121,62 +114,62 @@
             padding-bottom: 20px;
         }
 
-        .page-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 100vh;
+        /* Move content lower */
+        .content {
+            padding-top: 200px;
         }
 
-        /* Adjust main page text to center */
-        #start {
-            padding-top: 150px; /* Moved closer to vertical center */
+        /* Center the text lower on the loading screen */
+        #loader {
+            padding-top: 250px; /* Adjusted vertical padding */
         }
 
-        /* Hide all sections except the home page by default */
-        #main, #loader, #result, #affirmations {
-            display: none;
+        #loader-phrases {
+            margin-top: 20px;
+            color: #4072e6; /* Updated to blue */
         }
 
-        /* Style for the butt button */
-        #slapButton {
-            background: url('path-to-butt-image.jpg') no-repeat center center;
-            background-size: cover;
-            width: 150px;
-            height: 150px;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            margin-top: 30px;
+        /* Text size and color adjustments for the result page */
+        #result h1 {
+            font-size: 2.5em; /* Larger size for "Is Sarah Beautiful?" */
+            color: #e79c9c;   /* Soft pink for question text */
         }
 
-        /* Cursor as hand emoji */
-        #slapButton:hover {
-            cursor: url('path-to-hand-emoji.png'), auto;
+        #answer {
+            font-size: 1.8em; /* Slightly smaller size for the response */
+            color: #4072e6;   /* Blue color for the response */
         }
 
-        /* Adjust affirmation text spacing */
+        /* Affirmation text styling */
         #affirmationText {
-            margin-top: 50px;
+            margin-top: 80px; /* Increased margin for better mobile centering */
             font-family: 'Courier New', monospace;
             font-size: 24px;
             color: #4072e6; /* Updated to blue */
         }
+
+        /* Mobile adjustments for better centering */
+        @media (max-width: 768px) {
+            #affirmationText {
+                margin-top: 100px; /* Increased margin for mobile */
+            }
+        }
     </style>
 </head>
 <body>
+    <div id="page-wrapper">
+        <!-- Navigation Tabs -->
+        <a href="#" id="home-link" class="nav-link">return home</a>
+        <a href="#" id="beautiful-link" class="nav-link">is sarah beautiful?</a>
+        <a href="#" id="affirmation-link" class="nav-link">affirmations</a>
 
-    <div class="page-wrapper">
-        <!-- Navigation tabs -->
-        <a href="index.html" id="home-link" class="nav-link" style="display:none;">return home</a>
-        <a href="#main" id="beautiful-link" class="nav-link" style="display:none;">is sarah beautiful?</a>
-        <a href="#affirmations" id="affirmation-link" class="nav-link" style="display:none;">affirmations</a>
-
-        <div id="start">
-            <h1 class="content">the lord doth welcome thee</h1>
+        <!-- Home Section -->
+        <div id="start" class="content">
+            <h1>the lord doth welcome thee</h1>
             <button id="enterButton">enter</button>
         </div>
-        
+
+        <!-- Is Sarah Beautiful Section -->
         <div id="main" class="content">
             <h1>is sarah beautiful?</h1>
             <div id="buttons-container">
@@ -184,18 +177,20 @@
             </div>
         </div>
 
-        <div id="loader">
+        <!-- Loader Section -->
+        <div id="loader" class="content">
             <h2>gathering information<span class="ellipsis"></span></h2>
             <p id="loader-phrases">running calculations<span class="ellipsis"></span></p>
         </div>
 
+        <!-- Result Section -->
         <div id="result" class="content">
-            <h1>is sarah beautiful?</h1> <!-- New text added -->
+            <h1>is sarah beautiful?</h1>
             <h1 id="answer"></h1>
             <button class="affirmation-button" onclick="showAffirmations()">affirmation please</button>
         </div>
 
-        <!-- Affirmations section -->
+        <!-- Affirmations Section -->
         <div id="affirmations" class="content">
             <h1>slap for some love</h1>
             <button id="slapButton"></button>
@@ -210,25 +205,42 @@
 
     <script>
         // Update copyright year dynamically
-        window.addEventListener('DOMContentLoaded', (event) => {
-            document.getElementById('year').textContent = new Date().getFullYear();
-        });
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Fix enter button functionality
-        document.getElementById("enterButton").addEventListener('click', function() {
+        // Show sections dynamically
+        function showSection(sectionId) {
+            // Hide all sections first
             document.getElementById("start").style.display = "none";
-            document.getElementById("main").style.display = "block";
-            
-            // Show navigation tabs after entering
-            document.getElementById("home-link").style.display = "block";
-            document.getElementById("beautiful-link").style.display = "block";
-            document.getElementById("affirmation-link").style.display = "block";
+            document.getElementById("main").style.display = "none";
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("result").style.display = "none";
+            document.getElementById("affirmations").style.display = "none";
+
+            // Show the selected section
+            document.getElementById(sectionId).style.display = "block";
+        }
+
+        // Handle tab navigation
+        document.getElementById("home-link").addEventListener("click", function() {
+            showSection("start");
         });
 
-        // Find out if Sarah is beautiful and show loader, then result
+        document.getElementById("beautiful-link").addEventListener("click", function() {
+            showSection("main");
+        });
+
+        document.getElementById("affirmation-link").addEventListener("click", function() {
+            showSection("affirmations");
+        });
+
+        // Handle enter button
+        document.getElementById("enterButton").addEventListener("click", function() {
+            showSection("main");
+        });
+
+        // Find out if Sarah is beautiful and show loader
         function findOut() {
-            document.getElementById("main").style.display = "none";
-            document.getElementById("loader").style.display = "block";
+            showSection("loader");
 
             let phraseIndex = 0;
             const phraseInterval = setInterval(function() {
@@ -245,8 +257,7 @@
             // Simulate loading for 6 seconds before showing result
             setTimeout(function() {
                 clearInterval(phraseInterval);
-                document.getElementById("loader").style.display = "none";
-                document.getElementById("result").style.display = "block";
+                showSection("result");
                 var answers = ["of course!", "absolutely!", "duh!", "yup!", "always!", "no doubt!", "don't be a dummy!"];
                 var randomAnswer = answers[Math.floor(Math.random() * answers.length)];
                 document.getElementById("answer").innerText = randomAnswer;
@@ -255,28 +266,15 @@
 
         // Show affirmations section after clicking "affirmation please"
         function showAffirmations() {
-            document.getElementById("result").style.display = "none";
-            document.getElementById("affirmations").style.display = "block";
+            showSection("affirmations");
         }
 
-        // Handle the slap button to show new affirmations
-        document.getElementById("slapButton").addEventListener('click', function() {
+        // Handle the slap button for affirmations
+        document.getElementById("slapButton").addEventListener("click", function() {
             var affirmations = [
                 "you bring light to everyone around you", "you make the world a better place", 
                 "someone is grateful for you today", "you are enough just as you are", 
-                "your kindness is contagious", "you’re a wonderful friend", 
-                "never stop being you", "you’re stronger than you know", 
-                "you inspire people without even trying", "you’re loved, deeply", 
-                "the best is yet to come", "you deserve all the good things", 
-                "keep pushing, you’re almost there", "your heart is pure gold", 
-                "you're doing great, keep going!", "you have a beautiful soul", 
-                "your smile is pure magic", "the world is better with you in it", 
-                "every day, you get better and better", "you’ve got this!", 
-                "don’t forget how amazing you are", "you are loved beyond measure", 
-                "you’re a ray of sunshine in a cloudy world", "you bring out the best in others", 
-                "keep spreading your magic", "you’re capable of great things", 
-                "your energy is infectious", "you’re unstoppable!", "you are a gift to this world", 
-                "you’ve got a heart of gold", "your presence is powerful", "you are a dream come true"
+                "your kindness is contagious", "you’re a wonderful friend"
             ];
             var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
             document.getElementById("affirmationText").innerText = randomAffirmation;
