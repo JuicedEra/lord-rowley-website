@@ -37,7 +37,7 @@
             background-color: #fbc490;
         }
 
-        #loader {
+        #loader, #result, #affirmations {
             color: #ff6f61;
         }
 
@@ -69,21 +69,22 @@
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
+        /* Move tabs next to the home tab */
         #home-link {
             left: 10px;
         }
 
         #beautiful-link {
-            left: calc(50% - 120px); /* Centers the tab */
+            left: 80px; /* Position next to return home */
         }
 
         #affirmation-link {
-            left: calc(50% + 20px); /* Spaced equidistant from the 'Is Sarah Beautiful?' tab */
+            left: 200px; /* Spaced after beautiful tab */
         }
 
-        /* Centering text lower on the page */
+        /* Centering content lower on the page */
         .content {
-            padding-top: 150px;
+            padding-top: 200px;
         }
 
         #loader-phrases {
@@ -129,19 +130,39 @@
 
         /* Move the enter button further down */
         #start {
-            padding-top: 250px; /* Moves the enter button lower */
+            padding-top: 250px;
         }
 
         /* Hide all sections except the home page by default */
         #main, #loader, #result, #affirmations {
             display: none;
         }
+
+        /* Style for the butt button image */
+        #slapButton {
+            background: url('path-to-butt-image.jpg') no-repeat center center;
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        /* Adjust affirmation text spacing */
+        #affirmationText {
+            margin-top: 50px;
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            color: #ff6f61;
+        }
     </style>
 </head>
 <body>
 
     <div class="page-wrapper">
-        <!-- Navigation tabs (hidden on the home/landing page) -->
+        <!-- Navigation tabs -->
         <a href="index.html" id="home-link" class="nav-link" style="display:none;">return home</a>
         <a href="#main" id="beautiful-link" class="nav-link" style="display:none;">is sarah beautiful?</a>
         <a href="#affirmations" id="affirmation-link" class="nav-link" style="display:none;">affirmations</a>
@@ -171,7 +192,7 @@
         <!-- Affirmations section -->
         <div id="affirmations" class="content">
             <h1>slap for some love</h1>
-            <button id="slapButton">slap here</button>
+            <button id="slapButton"></button>
             <div id="affirmationText"></div>
         </div>
 
@@ -242,6 +263,29 @@
             var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
             document.getElementById("affirmationText").innerText = randomAffirmation;
         }
+
+        // Handle the slap button to show new affirmations
+        document.getElementById("slapButton").addEventListener('click', function() {
+            var affirmations = [
+                "you bring light to everyone around you", "you make the world a better place", 
+                "someone is grateful for you today", "you are enough just as you are", 
+                "your kindness is contagious", "you’re a wonderful friend", 
+                "never stop being you", "you’re stronger than you know", 
+                "you inspire people without even trying", "you’re loved, deeply", 
+                "the best is yet to come", "you deserve all the good things", 
+                "keep pushing, you’re almost there", "your heart is pure gold", 
+                "you're doing great, keep going!", "you have a beautiful soul", 
+                "your smile is pure magic", "the world is better with you in it", 
+                "every day, you get better and better", "you’ve got this!", 
+                "don’t forget how amazing you are", "you are loved beyond measure", 
+                "you’re a ray of sunshine in a cloudy world", "you bring out the best in others", 
+                "keep spreading your magic", "you’re capable of great things", 
+                "your energy is infectious", "you’re unstoppable!", "you are a gift to this world", 
+                "you’ve got a heart of gold", "your presence is powerful", "you are a dream come true"
+            ];
+            var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+            document.getElementById("affirmationText").innerText = randomAffirmation;
+        });
     </script>
 </body>
 </html>
