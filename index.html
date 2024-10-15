@@ -185,6 +185,33 @@
             color: #ff6f61;
             margin-top: 20px;
         }
+
+        /* Sparkling star animation */
+        .sparkle {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://image.shutterstock.com/image-vector/star-icon-sparkling-symbol-vector-260nw-1060293487.jpg'); /* Update this with your star graphic URL */
+            animation: sparkle-animation 2s ease-in-out;
+        }
+
+        @keyframes sparkle-animation {
+            0% {
+                left: -50px;
+                top: 50%;
+                opacity: 0;
+            }
+            50% {
+                left: 50%;
+                top: 50%;
+                opacity: 1;
+            }
+            100% {
+                left: 100%;
+                top: -50px;
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -237,7 +264,6 @@
 
     <!-- Firebase Configuration and Initialization -->
     <script>
-        // Initialize Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyCZveEsvqN_0hJ1JAQpVV7O8AdiX0NvC-k",
             authDomain: "lord-rowley.firebaseapp.com",
@@ -246,16 +272,14 @@
             storageBucket: "lord-rowley.appspot.com",
             messagingSenderId: "845423098853",
             appId: "1:845423098853:web:eebb47f08b563000618d0c",
-            measurementId: "G-20Q10R0XC2"
         };
 
+        // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // Slap Counter in Firebase
+        // Get the slap count from Firebase
         const slapCountRef = db.ref('slapCount');
-
-        // Retrieve the slap count from Firebase on page load
         slapCountRef.on('value', (snapshot) => {
             const slapCount = snapshot.val() || 0;
             document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
@@ -263,14 +287,12 @@
 
         // Increment slap count in Firebase
         document.getElementById("slapButton").addEventListener("click", function() {
-            slapCountRef.transaction(function(currentSlapCount) {
-                return (currentSlapCount || 0) + 1;
-            });
+            slapCountRef.transaction(currentSlapCount => (currentSlapCount || 0) + 1);
         });
-    </script>
 
-    <!-- Main JavaScript -->
-    <script>
+        // Dynamic year in copyright footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
         // Show sections dynamically
         function showSection(sectionId) {
             // Hide all sections first
@@ -297,46 +319,15 @@
 
         // Handle enter button
         document.getElementById("enterButton").addEventListener("click", function() {
-            showSection("main");
-        });
+            // Add sparkling star animation on enter
+            const star = document.createElement('div');
+            star.classList.add('sparkle');
+            document.body.appendChild(star);
 
-        // Improved randomization using a better shuffle function
-        function getRandomItem(arr) {
-            return arr[Math.floor(Math.random() * arr.length)];
-        }
-
-        // Find out if Sarah is beautiful and show loader
-        function findOut() {
-            showSection("loader");
-
-            const phrases = [
-                "tickling the data dragons… almost there!", "whispering secrets to the server gnomes…", 
-                "flipping pancakes while waiting for answers…", "polishing the crystal ball of wisdom…", 
-                "staring into the void for guidance…", "telling the hamsters to run faster…"
-            ];
-
-            let phraseInterval = setInterval(function() {
-                document.getElementById("loader-phrases").innerText = getRandomItem(phrases);
-            }, 2000);
-
-            // Simulate loading for 6 seconds before showing result
-            setTimeout(function() {
-                clearInterval(phraseInterval);
-                showSection("result");
-                const answers = [
-                    "hotter than a summer day in the desert", "she’s a certified heart-stopper!", 
-                    "so fine, she’s got traffic slowing down", "turning heads like she owns the place"
-                ];
-                document.getElementById("answer").innerText = getRandomItem(answers);
-            }, 6000);
-        }
-
-        // Handle affirmations button
-        document.getElementById("slapButton").addEventListener("click", function() {
-            const affirmations = [
-                "you’re the dessert my heart craves every day", "you’ve got a smile that makes the sun jealous"
-            ];
-            document.getElementById("affirmationText").innerText = getRandomItem(affirmations);
+            setTimeout(() => {
+                star.remove();
+                showSection("main");
+            }, 2000); // Duration of the sparkle animation
         });
     </script>
 </body>
