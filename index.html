@@ -249,22 +249,23 @@
             measurementId: "G-20Q10R0XC2"
         };
 
-        firebase.initializeApp(firebaseConfig);
+        const app = firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // Get the slap count from Firebase Realtime Database
+        // Slap Counter in Firebase
         const slapCountRef = db.ref('slapCount');
-        let slapCount = 0;
 
+        // Retrieve the slap count from Firebase on page load
         slapCountRef.on('value', (snapshot) => {
-            slapCount = snapshot.val() || 0;
+            const slapCount = snapshot.val() || 0;
             document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
         });
 
         // Increment slap count in Firebase
         document.getElementById("slapButton").addEventListener("click", function() {
-            slapCount++;
-            slapCountRef.set(slapCount);
+            slapCountRef.transaction(function(currentSlapCount) {
+                return (currentSlapCount || 0) + 1;
+            });
         });
     </script>
 
