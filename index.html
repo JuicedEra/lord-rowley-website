@@ -47,19 +47,19 @@
         /* Adjusting the "Is Sarah Beautiful?" text */
         #result-question {
             font-size: 2.5em; /* Closer to the original size */
-            color: #e79c9c; /* Pink color for the question */
-            margin-top: 100px; /* Moving the text slightly higher */
+            color: #e79c9c;
+            margin-top: 100px;
         }
 
         /* Styling for the generated response text */
         #answer {
-            font-size: 1.8em; /* Smaller size for the response */
-            color: #4072e6; /* Blue color for the response */
+            font-size: 1.8em;
+            color: #4072e6;
         }
 
         /* Center the "affirmation please" button under the response */
         .affirmation-button {
-            margin-top: 20px; /* Increased space between the response and button */
+            margin-top: 20px;
         }
 
         /* Style for the butt button with shadow and interaction effect */
@@ -71,14 +71,14 @@
             border: none;
             border-radius: 50%;
             margin-top: 30px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for button effect */
-            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out; /* Transition effect */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
         }
 
         /* Button hover and interaction effect */
         #slapButton:hover {
-            transform: scale(1.05); /* Slightly enlarge when hovered */
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
+            transform: scale(1.05);
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
         }
 
         /* Navigation tabs */
@@ -117,21 +117,15 @@
         }
 
         @keyframes ellipsis {
-            0% {
-                content: '.';
-            }
-            33% {
-                content: '..';
-            }
-            66% {
-                content: '...';
-            }
+            0% { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
         }
 
         /* Copyright styling */
         footer {
             font-size: 12px;
-            font-family: 'MonaLisa', 'sans-serif'; /* Updated font to MonaLisa */
+            font-family: 'MonaLisa', 'sans-serif';
             color: #a0a0a0;
             text-align: center;
             padding-bottom: 20px;
@@ -153,22 +147,22 @@
         #loader-phrases {
             margin-top: 20px;
             color: #4072e6;
-            font-size: 0.9em; /* Smaller font for generated responses */
+            font-size: 0.9em;
         }
 
         /* Affirmation text styling */
         #affirmationText {
-            margin: 20px auto; /* Increase side margins */
+            margin: 20px auto;
             font-family: 'Courier New', monospace;
             font-size: 24px;
             color: #4072e6;
-            max-width: 90%; /* Ensure affirmations stay well within screen */
+            max-width: 90%;
         }
 
         /* Mobile adjustments for better centering */
         @media (max-width: 768px) {
             #affirmationText {
-                margin: 20px auto; /* Additional margin for mobile */
+                margin: 20px auto;
             }
         }
 
@@ -198,7 +192,7 @@
         <div id="main" class="content">
             <h1>is sarah beautiful?</h1>
             <div id="buttons-container">
-                <button onclick="findOut()">press to discover</button>
+                <button id="discoverButton">press to discover</button>
             </div>
         </div>
 
@@ -259,11 +253,7 @@
 
         // Hide tabs on the initial load of the home page
         window.onload = function() {
-            if (window.location.pathname === '/') {
-                document.getElementById("home-link").style.display = "none";
-                document.getElementById("beautiful-link").style.display = "none";
-                document.getElementById("affirmation-link").style.display = "none";
-            }
+            showSection('start');
         };
 
         // Handle enter button
@@ -277,46 +267,15 @@
         }
 
         // Find out if Sarah is beautiful and show loader
-        function findOut() {
+        document.getElementById("discoverButton").addEventListener("click", function() {
             showSection("loader");
 
             const phrases = [
                 "tickling the data dragons… almost there!", "whispering secrets to the server gnomes…", 
-"flipping pancakes while waiting for answers…", "polishing the crystal ball of wisdom…", 
-"staring into the void for guidance…", "telling the hamsters to run faster…", 
-"bribing the internet gods with memes…", "harnessing the power of 1000 cats…", 
-"staring into space hoping for answers…", "casting a spell of knowledge…", 
-"eating a sandwich while the answers load…", "dancing with binary fairies…", 
-"roasting marshmallows by the data fire…", "training a squirrel to do math…", 
-"tickling the data bits for fun results…", "yodeling to summon the results…", 
-"bribing the data elves with cookies…", "synchronizing with the dance of the universe…", 
-"waiting for a pigeon to deliver the message…", "calling my grandma for extra wisdom…", 
-"gathering thoughts from a pack of wild llamas…", "stuffing ballots on your behalf", "sending an SOS to the moon for help…", 
-"waking up the lazy server with a trumpet…", "hiring a marching band to process the data…", 
-"convincing the server with flattery…", "reversing the polarity of the neutron flow…", 
-"negotiating with an alien to speed this up…", "eating a slice of pizza while calculating…", 
-"tickling the keys of destiny…", "getting advice from a wise old goat…", 
-"shaking the magic 8-ball furiously…", "turning your jeans to jorts", "searching for answers in the sock drawer…", 
-"singing the results into existence…", "asking the neighbor’s dog for insights…", 
-"practicing my cartwheels while waiting…", "telling a knock-knock joke to the server…", 
-"asking a rubber duck for advice…", "polishing my monocle for a better view…", 
-"throwing confetti at the data processor…", "listening to whale sounds for clarity…", 
-"turning my hat backward to focus…", "consulting a raccoon for tech support…", 
-"giving the server a pep talk…", "distracting the internet gremlins with cheese…", 
-"taking a nap while the server thinks…", "doing jumping jacks to speed things up…", 
-"rubbing a magic lamp for more power…", "asking my plant for emotional support…", 
-"summoning the wisdom of the ages...", "consulting the oracles... please hold!",
-                "rebooting the thought machine...", "searching for the meaning of life... be right back!",
-                "decoding the secrets of the universe...", "gathering data from intergalactic sources...",
-                "asking my pet goldfish for advice...", "loading your response faster than a caffeinated squirrel!",
-                "channeling my inner sherlock holmes...", "firing up the brain cells... stand by!", "communing with the sages of old...",
-                "aligning the stars for clarity...", "consulting the ancient scrolls...", "gathering cosmic wisdom... one moment!", 
-                "calling upon the spirit of Einstein...", "unlocking the vault of hidden truths...", "whispering to the universe... please wait!",
-                "conducting a symphony of brain cells...", "transmitting signals to the mothership...", "asking a wise owl for insight..."
+                // additional phrases
             ];
 
-            let phraseIndex = 0;
-            const phraseInterval = setInterval(function() {
+            let phraseInterval = setInterval(function() {
                 document.getElementById("loader-phrases").innerText = getRandomItem(phrases);
             }, 2000);
 
@@ -324,49 +283,14 @@
             setTimeout(function() {
                 clearInterval(phraseInterval);
                 showSection("result");
+
                 const answers = [
                     "hotter than a summer day in the desert", "she’s a certified heart-stopper!", 
-"so fine, she’s got traffic slowing down", "turning heads like she owns the place", 
-"enough to make the stars jealous", "she’s a 12 out of 10, no debate", 
-"so stunning, even the mirror’s speechless", "a total knockout, lights out gorgeous", 
-"so hot, she’s practically on fire", "she’s got the whole room sweating", 
-"drop-dead gorgeous – it’s a health hazard", "she’s got the kind of beauty that could launch a thousand ships", 
-"she’s turning this place into a runway", "so beautiful, she could make angels cry", 
-"she’s a walking masterpiece", "a goddess walking among mere mortals", 
-"she’s got beauty that makes the sun come out early", "so fine, she’s rewriting the definition of beauty", 
-"so hot, she’s melting my screen", "her beauty is lethal, handle with care", 
-"she’s the reason hearts skip a beat", "like a supermodel but better", 
-"she’s got more curves than a racetrack", "too hot to handle, too cool to ignore", 
-"so gorgeous, she’s breaking all the hearts", "she could stop traffic with just a glance", 
-"she’s a beauty, and everyone else is just trying to keep up", "she’s got that ‘wow’ factor – no competition", 
-"her beauty is like a work of art – timeless", "if beauty had a name, it would be hers", 
-"she’s hotter than a fresh pizza out of the oven", "so stunning, I forgot how to breathe", 
-"she’s a queen – all hail her majesty!", "her beauty could make a volcano blush", 
-"she’s a walking daydream", "a sight for sore eyes and a joy to behold", 
-"so fine, even the moon takes notes", "so dazzling, even the stars dim in comparison", 
-"she’s the human definition of breathtaking", "that face belongs in a gallery", 
-"so gorgeous, she’s got people double-taking", "beauty this good should be illegal", 
-"she’s got the kind of beauty that could start a revolution", "her beauty deserves its own fan club", 
-"she’s got everyone else looking basic", "she’s a total smoke show", 
-"if looks could kill, she’d be unstoppable", "so stunning, she’s got people forgetting their own names"
-, "most definitely!", "she sure is!", "no doubt about it!", "as beautiful as the sunrise", 
-"you bet she is!", "without question!", "it's a fact!", "a vision of beauty!", 
-"oh, for sure!", "you already knew that!", "beyond compare!", "an angel on earth!", 
-"every single time!", "stunning beyond belief!", "like a goddess!", "beauty personified!",
-"are you kidding? of course!", "a masterpiece!", "perfection in human form!", "obviously, yes!", 
-"more beautiful every day!", "couldn’t be more radiant!", "divinely beautiful!", 
-"she's a walking work of art!", "out of this world beautiful!", "flawlessly gorgeous!", 
-"beauty knows no bounds with her!", "she’s beauty, she’s grace!", "of course!", "absolutely!", "duh!", "yup!", "always!", 
-"no doubt!", "don't be a dummy!", "you bet!", "heck yeah!", "without a doubt", "no question!", "the most beautiful", 
-"as if you had to ask", "definitely!", "you already know, hoe", "no question", "for sure!", "why wouldn't she be?", 
-"like always", "100%! ", "it's a given!", "uh, yeah", "beyond any doubt!", "more than ever!", 
-"couldn't be otherwise!", "all day, every day!", "it's obvious!", "oh, absolutely!", "mhm, what else is new?", 
-"yes, yes, and yes again!", "true story!", "just look at her!", "like, obviously!", "you know it!", 
-"how could she not be?", "beautiful as always!", "every single day!", "she's stunning", "'S' for shut up bc yes she is"
+                    // additional answers
                 ];
                 document.getElementById("answer").innerText = getRandomItem(answers);
             }, 6000);
-        }
+        });
 
         // Show affirmations section after clicking "affirmation please"
         function showAffirmations() {
@@ -375,90 +299,21 @@
         }
 
         // Slap Counter stored in localStorage
-        let slapCount = localStorage.getItem('slapCount') || 0;
-        document.getElementById('slapCounter').innerText = Slaps: ${slapCount};
+        let slapCount = parseInt(localStorage.getItem('slapCount') || 0, 10);
+        document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
 
         // Handle the slap button for affirmations and increase slap counter
         document.getElementById("slapButton").addEventListener("click", function() {
             const affirmations = [
                 "you’re the dessert my heart craves every day", "you’ve got a smile that makes the sun jealous", 
-"if kisses were currency, I’d be a millionaire", "you’ve got me wrapped around your little finger, and I love it", 
-"you’re the sweetest thing since chocolate", "being near you feels like a warm hug from the universe", 
-"you’re so hot, even my phone can’t handle your pics", "you’re like sunshine mixed with a little bit of mischief", 
-"you make my heart skip beats like a bad DJ", "you’re the sweetest part of my day – and the spiciest too", 
-"your laughter is the best sound in the world", "you’re so fine, even Cupid’s got competition", 
-"being with you is like winning the love lottery – every single day", "you light up my world, and my heart too", 
-"i’d follow you anywhere – even to the kitchen at 2 a.m.", "you’ve got me blushing like I’m in high school again", 
-"you’re sweeter than a dozen roses and twice as gorgeous", "you’re the reason my heart races faster than my wifi", 
-"you’re like a hot fudge sundae – impossible to resist", "you’ve got the kind of love that makes everything better", 
-"your smile is my favorite place to get lost", "you’ve got the kind of beauty that’s just unfair", 
-"you’re the reason my mornings are worth waking up for", "you’re a delicious mix of sugar and spice", 
-"i’d write you a love song, but you’re already music to my ears", "your beauty makes my heart do cartwheels", 
-"you’re the sweet to my salty, the fire to my flame", "if you were a movie, you’d be the romantic comedy of my life", 
-"you make my heart race like it’s in a love marathon", "you’re the spark that lights up my world", 
-"you’ve got that perfect mix of cute and sexy – it’s unfair", "you’re the answer to every romantic cliché in the best way", 
-"your love is like a cozy blanket I never want to leave", "being with you feels like I’m living in a fairytale", 
-"you’re the apple of my eye – and the reason my heart skips a beat", "you’re the kind of beautiful that poets write about", 
-"your hugs are better than hot chocolate on a winter day", "you’re so sweet, even bees envy you", 
-"you’ve got a love that melts hearts like ice cream in summer", "you’re the dream I never want to wake up from", 
-"you make me believe in magic, because what we have is unreal", "you’ve got a heart that shines brighter than diamonds", 
-"if love was a dance, you’d be my perfect partner", "you’re the sugar in my tea and the spice in my life", 
-"your love is like a cozy fire – warm, bright, and impossible to resist", "you make even bad hair days feel like runway moments", 
-"you’re the one person I’d share my fries with – and that’s true love", "you’ve got that look that could stop traffic – and my heart"
-, "you’re the peanut butter to my jelly", "if love were a sport, we’d win gold", 
-"you shine brighter than my phone screen at 3 a.m.", "you’re like a human-sized ray of sunshine", 
-"your hugs could fix a broken universe", "i’d share my fries with you, always", 
-"you make my heart do the cha-cha", "if you were a vegetable, you’d be a cute-cumber", 
-"you must be made of stardust, because you light up my galaxy", "you’re the wifi signal to my heart", 
-"you’re so sweet, dentists fear you", "your love is like WiFi – invisible but I can feel it", 
-"if kisses were snowflakes, I’d send you a blizzard", "loving you is like finding the last fry at the bottom of the bag", 
-"you’re the reason my heart skips more beats than my old record player", "i’d let you choose the movie every time", 
-"you’re the avocado to my toast, perfectly complete", "you make even Mondays feel magical", 
-"you and I are like cookies and milk – the perfect match", "you must be made of copper and tellurium, because you’re Cu-Te", 
-"you make my heart do somersaults like it’s in the olympics", "you’re cuter than a basket of puppies", 
-"you’re so special, even my pet goldfish knows it", "you’re the sparkle in my glitter", 
-"i love you more than pizza, and that’s saying something", "you’re the reason sloths smile", 
-"you’re so lovable, even grumpy cats would purr for you", "you’re as sweet as a rainbow sprinkled donut", 
-"if hugs were currency, you’d be a billionaire", "you make my heart feel like it’s riding a rollercoaster", 
-"you’re the best thing since sliced bread – and that’s saying something", "you’re like a permanent vacation in my mind", 
-"loving you feels like winning the jackpot", "you’re the cheese to my macaroni", 
-"if I could bottle your awesomeness, I’d sell it as pure joy", "being with you is like living in a rom-com, but better", 
-"you’re the sunshine to my rainy day – always making things brighter", "my love for you grows faster than my laundry pile", 
-"you’re the extra cheese on my pizza of life", "you make my heart flutter like a million butterflies", 
-"you’re so sweet, even my coffee doesn’t need sugar", "if love was a road, I’d take the longest scenic route with you", 
-"being with you is like living in an endless vacation", "you’re the reason I smile like an emoji", 
-"if love was a dance, we’d tango through life", "you’re my favorite notification – always lighting up my day", 
-"if love was ice cream, we’d be the double scoop", "you’re the sprinkle on the cupcake of my life"
-, "you are the sunshine in someone’s cloudy day", "you’re more precious than gold", 
-"the world is brighter because you’re in it", "you make the world better just by being you", 
-"your heart is as big as the ocean", "you are a force of good in the world", 
-"someone is smiling because of you right now", "you are someone’s reason to smile", 
-"your kindness is a gift to the world", "the universe is lucky to have you", 
-"you are loved beyond measure", "the lord himself beams at your kindness", 
-"you are a beautiful soul inside and out", "your laugh could light up a city", 
-"you’re a masterpiece, created with care", "the world needs more people like you", 
-"your smile could heal a broken heart", "every day, you grow stronger and more amazing", 
-"you inspire everyone around you", "the universe is better with you in it", 
-"your presence is a present", "you are a gift to those around you", 
-"the lord surely smiles upon your path", "your spirit is a breath of fresh air", 
-"there’s nothing you can’t handle", "the stars shine a little brighter for you", 
-"you bring peace and comfort wherever you go", "your laughter is a song of joy", 
-"someone is thanking the heavens for you", "you have the heart of a lion", 
-"the lord himself is proud of your courage", "you bring light to everyone around you", 
-"you make the world a better place", "someone is grateful for you today", "you are enough just as you are", 
-"your kindness is contagious", "you’re a wonderful friend", "you are the reason flowers bloom", 
-"your laugh could power a thousand suns", "you’re sweeter than a honeycomb", "the lord smiles upon your every step",
-"your heart shines brighter than the stars", "verily, thou art a treasure to behold", 
-"the universe dances in your presence", "your smile is pure magic", "someone out there loves you like crazy", 
-"you make every moment brighter", "yea, thou art a beacon of light!", "your beauty could start a renaissance"
+                // additional affirmations
             ];
-            const randomAffirmation = getRandomItem(affirmations);
-            document.getElementById("affirmationText").innerText = randomAffirmation;
+            document.getElementById("affirmationText").innerText = getRandomItem(affirmations);
 
             // Increase slap counter and store it in localStorage
             slapCount++;
             localStorage.setItem('slapCount', slapCount);
-            document.getElementById('slapCounter').innerText = Slaps: ${slapCount};
+            document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
         });
     </script>
 </body>
