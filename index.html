@@ -38,7 +38,7 @@
         }
 
         #loader, #result, #affirmations {
-            color: #ff6f61;
+            color: #4072e6; /* Updated to blue */
         }
 
         #buttons-container {
@@ -55,7 +55,7 @@
             padding: 5px 15px;
         }
 
-        /* Navigation tabs with box styling */
+        /* Navigation tabs with increased spacing */
         .nav-link {
             position: absolute;
             top: 10px;
@@ -69,26 +69,27 @@
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* Move tabs next to the home tab */
+        /* Move tabs with more lateral spacing */
         #home-link {
             left: 10px;
         }
 
         #beautiful-link {
-            left: 80px; /* Position next to return home */
+            left: 120px; /* Increase spacing */
         }
 
         #affirmation-link {
-            left: 200px; /* Spaced after beautiful tab */
+            left: 280px; /* Increase spacing */
         }
 
-        /* Centering content lower on the page */
+        /* Centering content lower on pages */
         .content {
-            padding-top: 200px;
+            padding-top: 200px; /* Lowered vertical padding */
         }
 
         #loader-phrases {
             margin-top: 20px;
+            color: #4072e6; /* Updated to blue */
         }
 
         /* Loading ellipses animation */
@@ -120,7 +121,6 @@
             padding-bottom: 20px;
         }
 
-        /* Ensure copyright is at the bottom of the screen */
         .page-wrapper {
             display: flex;
             flex-direction: column;
@@ -128,9 +128,9 @@
             min-height: 100vh;
         }
 
-        /* Move the enter button further down */
+        /* Adjust main page text to center */
         #start {
-            padding-top: 250px;
+            padding-top: 150px; /* Moved closer to vertical center */
         }
 
         /* Hide all sections except the home page by default */
@@ -138,7 +138,7 @@
             display: none;
         }
 
-        /* Style for the butt button image */
+        /* Style for the butt button */
         #slapButton {
             background: url('path-to-butt-image.jpg') no-repeat center center;
             background-size: cover;
@@ -150,12 +150,17 @@
             margin-top: 30px;
         }
 
+        /* Cursor as hand emoji */
+        #slapButton:hover {
+            cursor: url('path-to-hand-emoji.png'), auto;
+        }
+
         /* Adjust affirmation text spacing */
         #affirmationText {
             margin-top: 50px;
             font-family: 'Courier New', monospace;
             font-size: 24px;
-            color: #ff6f61;
+            color: #4072e6; /* Updated to blue */
         }
     </style>
 </head>
@@ -185,6 +190,7 @@
         </div>
 
         <div id="result" class="content">
+            <h1>is sarah beautiful?</h1> <!-- New text added -->
             <h1 id="answer"></h1>
             <button class="affirmation-button" onclick="showAffirmations()">affirmation please</button>
         </div>
@@ -251,17 +257,6 @@
         function showAffirmations() {
             document.getElementById("result").style.display = "none";
             document.getElementById("affirmations").style.display = "block";
-
-            var affirmations = [
-                "you're doing amazing, sweetie", "you bring light to everyone around you", 
-                "someone is grateful for you today", "you are enough just as you are", 
-                "your kindness is contagious", "you inspire people without even trying", 
-                "keep shining, you're a star", "you've got this!", "you're loved deeply", 
-                "you're stronger than you know", "the best is yet to come!"
-            ];
-
-            var randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
-            document.getElementById("affirmationText").innerText = randomAffirmation;
         }
 
         // Handle the slap button to show new affirmations
