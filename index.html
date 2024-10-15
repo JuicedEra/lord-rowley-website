@@ -113,7 +113,7 @@
         }
 
         #answer {
-            font-size: 1.5em; /* Smaller size for response */
+            font-size: 1.2em; /* Smaller size for response */
             color: #4072e6; /* Blue color for response */
         }
 
@@ -142,11 +142,12 @@
         #loader-phrases {
             margin-top: 20px;
             color: #4072e6;
+            font-size: 0.9em; /* Smaller font for generated responses */
         }
 
         /* Affirmation text styling */
         #affirmationText {
-            margin-top: 80px;
+            margin-top: 20px; /* Moved closer to the button */
             font-family: 'Courier New', monospace;
             font-size: 24px;
             color: #4072e6;
@@ -155,7 +156,7 @@
         /* Mobile adjustments for better centering */
         @media (max-width: 768px) {
             #affirmationText {
-                margin-top: 100px;
+                margin-top: 20px; /* Slightly higher margin for mobile */
             }
         }
     </style>
@@ -237,15 +238,15 @@
 
         // Handle tab navigation
         document.getElementById("home-link").addEventListener("click", function() {
-            showSection("start");
+            window.location.reload(); // Reloads the page
         });
 
         document.getElementById("beautiful-link").addEventListener("click", function() {
-            showSection("main");
+            window.location.reload(); // Reloads the page
         });
 
         document.getElementById("affirmation-link").addEventListener("click", function() {
-            showSection("affirmations");
+            window.location.reload(); // Reloads the page
         });
 
         // Handle enter button
@@ -282,6 +283,7 @@
         // Show affirmations section after clicking "affirmation please"
         function showAffirmations() {
             showSection("affirmations");
+            document.getElementById("affirmationText").innerText = ""; // Clear text when navigating to affirmations page
         }
 
         // Handle the slap button for affirmations
