@@ -24,7 +24,7 @@
         }
 
         button {
-            background-color: #339999;
+            background-color: #339999; /* Teal/blueish-green color */
             border: none;
             padding: 10px 20px;
             font-size: 18px;
@@ -46,20 +46,20 @@
 
         /* Adjusting the "Is Sarah Beautiful?" text */
         #result-question {
-            font-size: 2.5em;
-            color: #e79c9c;
-            margin-top: 100px;
+            font-size: 2.5em; /* Closer to the original size */
+            color: #e79c9c; /* Pink color for the question */
+            margin-top: 100px; /* Moving the text slightly higher */
         }
 
         /* Styling for the generated response text */
         #answer {
-            font-size: 1.8em;
-            color: #4072e6;
+            font-size: 1.8em; /* Smaller size for the response */
+            color: #4072e6; /* Blue color for the response */
         }
 
         /* Center the "affirmation please" button under the response */
         .affirmation-button {
-            margin-top: 20px;
+            margin-top: 20px; /* Increased space between the response and button */
         }
 
         /* Style for the butt button with shadow and interaction effect */
@@ -71,14 +71,14 @@
             border: none;
             border-radius: 50%;
             margin-top: 30px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for button effect */
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out; /* Transition effect */
         }
 
         /* Button hover and interaction effect */
         #slapButton:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
+            transform: scale(1.05); /* Slightly enlarge when hovered */
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
         }
 
         /* Navigation tabs */
@@ -131,7 +131,7 @@
         /* Copyright styling */
         footer {
             font-size: 12px;
-            font-family: 'MonaLisa', 'sans-serif';
+            font-family: 'MonaLisa', 'sans-serif'; /* Updated font to MonaLisa */
             color: #a0a0a0;
             text-align: center;
             padding-bottom: 20px;
@@ -153,22 +153,22 @@
         #loader-phrases {
             margin-top: 20px;
             color: #4072e6;
-            font-size: 0.9em;
+            font-size: 0.9em; /* Smaller font for generated responses */
         }
 
         /* Affirmation text styling */
         #affirmationText {
-            margin: 20px auto;
+            margin: 20px auto; /* Increase side margins */
             font-family: 'Courier New', monospace;
             font-size: 24px;
             color: #4072e6;
-            max-width: 90%;
+            max-width: 90%; /* Ensure affirmations stay well within screen */
         }
 
         /* Mobile adjustments for better centering */
         @media (max-width: 768px) {
             #affirmationText {
-                margin: 20px auto;
+                margin: 20px auto; /* Additional margin for mobile */
             }
         }
 
@@ -198,7 +198,7 @@
         <div id="main" class="content">
             <h1>is sarah beautiful?</h1>
             <div id="buttons-container">
-                <button id="discoverButton">press to discover</button>
+                <button onclick="findOut()">press to discover</button>
             </div>
         </div>
 
@@ -220,7 +220,7 @@
             <h1>slap for some love</h1>
             <button id="slapButton"></button>
             <div id="affirmationText"></div>
-            <div id="slapCounter">Slaps: 0</div>
+            <div id="slapCounter">Slaps: 0</div> <!-- Slap counter -->
         </div>
 
         <!-- Copyright footer -->
@@ -229,37 +229,9 @@
         </footer>
     </div>
 
-    <!-- Firebase Script -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js"></script>
-
     <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCZveEsvqN_0hJ1JAQpVV7O8AdiX0NvC-k",
-            authDomain: "lord-rowley.firebaseapp.com",
-            databaseURL: "https://lord-rowley-default-rtdb.firebaseio.com/",
-            projectId: "lord-rowley",
-            storageBucket: "lord-rowley.appspot.com",
-            messagingSenderId: "845423098853",
-            appId: "1:845423098853:web:eebb47f08b563000618d0c"
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
-        // Get the slap count from Firebase
-        const slapCountRef = db.ref('slapCount');
-        slapCountRef.on('value', (snapshot) => {
-            const slapCount = snapshot.val() || 0;
-            document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
-        });
-
-        // Increment slap count in Firebase
-        document.getElementById("slapButton").addEventListener("click", function() {
-            slapCountRef.transaction(currentSlapCount => (currentSlapCount || 0) + 1);
-        });
+        // Update copyright year dynamically
+        document.getElementById('year').textContent = new Date().getFullYear();
 
         // Show sections dynamically
         function showSection(sectionId) {
@@ -287,9 +259,11 @@
 
         // Hide tabs on the initial load of the home page
         window.onload = function() {
-            document.getElementById("home-link").style.display = "none";
-            document.getElementById("beautiful-link").style.display = "none";
-            document.getElementById("affirmation-link").style.display = "none";
+            if (window.location.pathname === '/') {
+                document.getElementById("home-link").style.display = "none";
+                document.getElementById("beautiful-link").style.display = "none";
+                document.getElementById("affirmation-link").style.display = "none";
+            }
         };
 
         // Handle enter button
@@ -302,14 +276,8 @@
             return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        // Helper function to get multiple random items from an array
-        function getRandomItems(arr, count) {
-            const shuffled = arr.sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, count);
-        }
-
         // Find out if Sarah is beautiful and show loader
-        document.getElementById("discoverButton").addEventListener("click", function() {
+        function findOut() {
             showSection("loader");
 
             const phrases = [
@@ -347,16 +315,15 @@
                 "conducting a symphony of brain cells...", "transmitting signals to the mothership...", "asking a wise owl for insight..."
             ];
 
-            let phraseInterval = setInterval(function() {
-                let selectedPhrases = getRandomItems(phrases, 3); // Get 3 random phrases
-                document.getElementById("loader-phrases").innerText = selectedPhrases.join(" ");
+            let phraseIndex = 0;
+            const phraseInterval = setInterval(function() {
+                document.getElementById("loader-phrases").innerText = getRandomItem(phrases);
             }, 2000);
 
-            // Stop the interval and show results after 6 seconds
+            // Simulate loading for 6 seconds before showing result
             setTimeout(function() {
                 clearInterval(phraseInterval);
                 showSection("result");
-
                 const answers = [
                     "hotter than a summer day in the desert", "she’s a certified heart-stopper!", 
 "so fine, she’s got traffic slowing down", "turning heads like she owns the place", 
@@ -399,13 +366,17 @@
                 ];
                 document.getElementById("answer").innerText = getRandomItem(answers);
             }, 6000);
-        });
+        }
 
         // Show affirmations section after clicking "affirmation please"
         function showAffirmations() {
             showSection("affirmations");
             document.getElementById("affirmationText").innerText = ""; // Clear text when navigating to affirmations page
         }
+
+        // Slap Counter stored in localStorage
+        let slapCount = localStorage.getItem('slapCount') || 0;
+        document.getElementById('slapCounter').innerText = Slaps: ${slapCount};
 
         // Handle the slap button for affirmations and increase slap counter
         document.getElementById("slapButton").addEventListener("click", function() {
@@ -481,11 +452,14 @@
 "the universe dances in your presence", "your smile is pure magic", "someone out there loves you like crazy", 
 "you make every moment brighter", "yea, thou art a beacon of light!", "your beauty could start a renaissance"
             ];
-            document.getElementById("affirmationText").innerText = getRandomItem(affirmations);
-        });
+            const randomAffirmation = getRandomItem(affirmations);
+            document.getElementById("affirmationText").innerText = randomAffirmation;
 
-        // Dynamic year in copyright footer
-        document.getElementById('year').textContent = new Date().getFullYear();
+            // Increase slap counter and store it in localStorage
+            slapCount++;
+            localStorage.setItem('slapCount', slapCount);
+            document.getElementById('slapCounter').innerText = Slaps: ${slapCount};
+        });
     </script>
 </body>
 </html>
