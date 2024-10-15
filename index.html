@@ -62,7 +62,7 @@
             margin-top: 20px; /* Increased space between the response and button */
         }
 
-        /* Style for the butt button */
+        /* Style for the butt button with shadow and interaction effect */
         #slapButton {
             background: url('https://static-00.iconduck.com/assets.00/butt-plain-emoji-512x496-5ipc0v6s.png') no-repeat center center;
             background-size: cover;
@@ -71,6 +71,14 @@
             border: none;
             border-radius: 50%;
             margin-top: 30px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for button effect */
+            transition: transform 0.1s ease-in-out, box-shadow 0.1s ease-in-out; /* Transition effect */
+        }
+
+        /* Button hover and interaction effect */
+        #slapButton:hover {
+            transform: scale(1.05); /* Slightly enlarge when hovered */
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
         }
 
         /* Navigation tabs */
@@ -163,6 +171,14 @@
                 margin: 20px auto; /* Additional margin for mobile */
             }
         }
+
+        /* Slap Counter styling */
+        #slapCounter {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            color: #ff6f61;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -204,6 +220,7 @@
             <h1>slap for some love</h1>
             <button id="slapButton"></button>
             <div id="affirmationText"></div>
+            <div id="slapCounter">Slaps: 0</div> <!-- Slap counter -->
         </div>
 
         <!-- Copyright footer -->
@@ -302,7 +319,11 @@
             document.getElementById("affirmationText").innerText = ""; // Clear text when navigating to affirmations page
         }
 
-        // Handle the slap button for affirmations
+        // Slap Counter stored in localStorage
+        let slapCount = localStorage.getItem('slapCount') || 0;
+        document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
+
+        // Handle the slap button for affirmations and increase slap counter
         document.getElementById("slapButton").addEventListener("click", function() {
             const affirmations = [
                 "you bring light to everyone around you", "you make the world a better place", 
@@ -315,7 +336,13 @@
                 "someone out there loves you like crazy", "you make every moment brighter", 
                 "yea, thou art a beacon of light!", "your beauty could start a renaissance"
             ];
-            document.getElementById("affirmationText").innerText = getRandomItem(affirmations);
+            const randomAffirmation = getRandomItem(affirmations);
+            document.getElementById("affirmationText").innerText = randomAffirmation;
+
+            // Increase slap counter and store it in localStorage
+            slapCount++;
+            localStorage.setItem('slapCount', slapCount);
+            document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
         });
     </script>
 </body>
