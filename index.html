@@ -287,11 +287,9 @@
 
         // Hide tabs on the initial load of the home page
         window.onload = function() {
-            if (window.location.pathname === '/') {
-                document.getElementById("home-link").style.display = "none";
-                document.getElementById("beautiful-link").style.display = "none";
-                document.getElementById("affirmation-link").style.display = "none";
-            }
+            document.getElementById("home-link").style.display = "none";
+            document.getElementById("beautiful-link").style.display = "none";
+            document.getElementById("affirmation-link").style.display = "none";
         };
 
         // Handle enter button
