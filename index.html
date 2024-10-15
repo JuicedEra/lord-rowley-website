@@ -42,6 +42,18 @@
             display: none;
         }
 
+        /* Styling for "Is Sarah Beautiful?" question text */
+        #result-question {
+            font-size: 3.5em; /* Larger size for "Is Sarah Beautiful?" */
+            color: #e79c9c; /* Pink color for the question */
+        }
+
+        /* Styling for the generated response text */
+        #answer {
+            font-size: 1.8em; /* Smaller size for the response */
+            color: #4072e6; /* Blue color for the response */
+        }
+
         /* Style for the butt button */
         #slapButton {
             background: url('path-to-butt-image.jpg') no-repeat center center;
@@ -104,17 +116,6 @@
             66% {
                 content: '...';
             }
-        }
-
-        /* Adjust text for result */
-        #result h1 {
-            font-size: 3em; /* Significantly larger size for "Is Sarah Beautiful?" */
-            color: #e79c9c; /* Soft pink for question text */
-        }
-
-        #answer {
-            font-size: 1.5em; /* Smaller size for response */
-            color: #4072e6; /* Blue color for response */
         }
 
         /* Copyright styling */
@@ -190,7 +191,7 @@
 
         <!-- Result Section -->
         <div id="result" class="content">
-            <h1>is sarah beautiful?</h1>
+            <h1 id="result-question">is sarah beautiful?</h1>
             <h1 id="answer"></h1>
             <button class="affirmation-button" onclick="showAffirmations()">affirmation please</button>
         </div>
