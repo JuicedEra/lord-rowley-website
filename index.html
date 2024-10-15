@@ -22,7 +22,7 @@
         }
 
         button {
-            background-color: #ffdd94;
+            background-color: #339999; /* Teal/blueish-green color */
             border: none;
             padding: 10px 20px;
             font-size: 18px;
@@ -34,7 +34,7 @@
         }
 
         button:hover {
-            background-color: #fbc490;
+            background-color: #2f8f8f;
         }
 
         /* Hide sections by default */
@@ -106,62 +106,66 @@
             }
         }
 
+        /* Adjust text for result */
+        #result h1 {
+            font-size: 3em; /* Larger size for "Is Sarah Beautiful?" */
+            color: #e79c9c; /* Soft pink for question text */
+        }
+
+        #answer {
+            font-size: 1.5em; /* Smaller size for response */
+            color: #4072e6; /* Blue color for response */
+        }
+
         /* Copyright styling */
         footer {
             font-size: 12px;
+            font-family: 'MonaLisa', 'sans-serif'; /* Updated font to MonaLisa */
             color: #a0a0a0;
             text-align: center;
             padding-bottom: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
         }
 
-        /* Move content lower */
+        /* Center content lower on pages */
         .content {
             padding-top: 200px;
         }
 
         /* Center the text lower on the loading screen */
         #loader {
-            padding-top: 250px; /* Adjusted vertical padding */
+            padding-top: 250px;
         }
 
         #loader-phrases {
             margin-top: 20px;
-            color: #4072e6; /* Updated to blue */
-        }
-
-        /* Text size and color adjustments for the result page */
-        #result h1 {
-            font-size: 2.5em; /* Larger size for "Is Sarah Beautiful?" */
-            color: #e79c9c;   /* Soft pink for question text */
-        }
-
-        #answer {
-            font-size: 1.8em; /* Slightly smaller size for the response */
-            color: #4072e6;   /* Blue color for the response */
+            color: #4072e6;
         }
 
         /* Affirmation text styling */
         #affirmationText {
-            margin-top: 80px; /* Increased margin for better mobile centering */
+            margin-top: 80px;
             font-family: 'Courier New', monospace;
             font-size: 24px;
-            color: #4072e6; /* Updated to blue */
+            color: #4072e6;
         }
 
         /* Mobile adjustments for better centering */
         @media (max-width: 768px) {
             #affirmationText {
-                margin-top: 100px; /* Increased margin for mobile */
+                margin-top: 100px;
             }
         }
     </style>
 </head>
 <body>
     <div id="page-wrapper">
-        <!-- Navigation Tabs -->
-        <a href="#" id="home-link" class="nav-link">return home</a>
-        <a href="#" id="beautiful-link" class="nav-link">is sarah beautiful?</a>
-        <a href="#" id="affirmation-link" class="nav-link">affirmations</a>
+        <!-- Navigation Tabs (Hidden on Home page) -->
+        <a href="#" id="home-link" class="nav-link" style="display: none;">return home</a>
+        <a href="#" id="beautiful-link" class="nav-link" style="display: none;">is sarah beautiful?</a>
+        <a href="#" id="affirmation-link" class="nav-link" style="display: none;">affirmations</a>
 
         <!-- Home Section -->
         <div id="start" class="content">
@@ -218,6 +222,17 @@
 
             // Show the selected section
             document.getElementById(sectionId).style.display = "block";
+
+            // Show tabs on all pages except the home page
+            if (sectionId === "start") {
+                document.getElementById("home-link").style.display = "none";
+                document.getElementById("beautiful-link").style.display = "none";
+                document.getElementById("affirmation-link").style.display = "none";
+            } else {
+                document.getElementById("home-link").style.display = "block";
+                document.getElementById("beautiful-link").style.display = "block";
+                document.getElementById("affirmation-link").style.display = "block";
+            }
         }
 
         // Handle tab navigation
