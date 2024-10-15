@@ -108,12 +108,12 @@
 
         /* Adjust text for result */
         #result h1 {
-            font-size: 3em; /* Larger size for "Is Sarah Beautiful?" */
+            font-size: 3em; /* Significantly larger size for "Is Sarah Beautiful?" */
             color: #e79c9c; /* Soft pink for question text */
         }
 
         #answer {
-            font-size: 1.2em; /* Smaller size for response */
+            font-size: 1.5em; /* Smaller size for response */
             color: #4072e6; /* Blue color for response */
         }
 
@@ -164,9 +164,9 @@
 <body>
     <div id="page-wrapper">
         <!-- Navigation Tabs (Hidden on Home page) -->
-        <a href="#" id="home-link" class="nav-link" style="display: none;">return home</a>
-        <a href="#" id="beautiful-link" class="nav-link" style="display: none;">is sarah beautiful?</a>
-        <a href="#" id="affirmation-link" class="nav-link" style="display: none;">affirmations</a>
+        <a href="#" id="home-link" class="nav-link" onclick="showSection('start'); return false;">return home</a>
+        <a href="#" id="beautiful-link" class="nav-link" onclick="showSection('main'); return false;">is sarah beautiful?</a>
+        <a href="#" id="affirmation-link" class="nav-link" onclick="showSection('affirmations'); return false;">affirmations</a>
 
         <!-- Home Section -->
         <div id="start" class="content">
@@ -235,19 +235,6 @@
                 document.getElementById("affirmation-link").style.display = "block";
             }
         }
-
-        // Handle tab navigation
-        document.getElementById("home-link").addEventListener("click", function() {
-            window.location.reload(); // Reloads the page
-        });
-
-        document.getElementById("beautiful-link").addEventListener("click", function() {
-            window.location.reload(); // Reloads the page
-        });
-
-        document.getElementById("affirmation-link").addEventListener("click", function() {
-            window.location.reload(); // Reloads the page
-        });
 
         // Handle enter button
         document.getElementById("enterButton").addEventListener("click", function() {
