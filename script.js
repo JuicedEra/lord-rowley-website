@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function startLoading() {
         showSection("loader");
+        const phrases = ["phrase 1", "phrase 2", "phrase 3"];
         let phraseInterval = setInterval(() => {
             document.getElementById("loader-phrases").innerText = getRandomItem(phrases);
         }, 2000);
@@ -31,11 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             clearInterval(phraseInterval);
             showSection("result");
+            const answers = ["Yes", "Absolutely!", "No doubt!"];
             document.getElementById("answer").innerText = getRandomItem(answers);
         }, 6000);
     }
 
     function handleSlap() {
+        const affirmations = ["You're amazing!", "Keep shining!", "You rock!"];
         const affirmationText = document.getElementById("affirmationText");
         slapCount++;
         localStorage.setItem('slapCount', slapCount);
@@ -46,4 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function getRandomItem(arr) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
+
+    // Show the home section on initial load
+    showSection('start');
 });
