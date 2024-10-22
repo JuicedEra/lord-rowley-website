@@ -366,7 +366,7 @@
 
         // Slap Counter stored in localStorage
         let slapCount = parseInt(localStorage.getItem('slapCount') || 0, 10);
-        document.getElementById('slapCounter').innerText = Slaps: ${slapCount};
+        document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
 
         // Handle the slap button for affirmations and increase slap counter
         document.getElementById("slapButton").addEventListener("click", function() {
@@ -447,7 +447,7 @@
             // Increase slap counter and store it in localStorage
             slapCount++;
             localStorage.setItem('slapCount', slapCount);
-            document.getElementById('slapCounter').innerText = Slaps: ${slapCount};
+            document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
         });
     </script>
 </body>
