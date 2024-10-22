@@ -173,6 +173,14 @@
             color: #ff6f61;
             margin-top: 20px;
         }
+
+        #bagel-wars input, #bagel-wars select {
+    display: block;
+    margin: 10px 0;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+}
     </style>
 </head>
 <body>
@@ -180,6 +188,7 @@
         <!-- Navigation Tabs (Hidden on Home page) -->
         <a href="#" id="home-link" class="nav-link" onclick="showSection('start'); return false;">return home</a>
         <a href="#" id="beautiful-link" class="nav-link" onclick="showSection('main'); return false;">is sarah beautiful?</a>
+        <a href="#" id="bagel-wars-link" class="nav-link" onclick="showSection('bagel-wars'); return false;">bagel wars</a>
         <a href="#" id="affirmation-link" class="nav-link" onclick="showSection('affirmations'); return false;">affirmations</a>
 
         <!-- Home Section -->
@@ -217,6 +226,29 @@
             <div id="slapCounter">Slaps: 0</div> <!-- Slap counter -->
         </div>
 
+        <!-- Bagel Wars Page -->
+<div id="bagel-wars" class="content">
+    <h1>Bagel Wars</h1>
+    <form id="bagel-form">
+        <h2>Sweet Bagel</h2>
+        <label>Taste (1-10): <input type="number" id="sweet-taste" min="1" max="10" required></label>
+        <label>Texture (1-10): <input type="number" id="sweet-texture" min="1" max="10" required></label>
+
+        <h2>Cost Efficiency</h2>
+        <select id="cost-range">
+            <option value="5">Exceptional Value ($12–15): +5</option>
+            <option value="2">Fair Value ($15–20): +2</option>
+            <option value="-5">Poor Value (Above $20): -5</option>
+        </select>
+
+        <h2>Bonus Points</h2>
+        <label>Bonus (0-5): <input type="number" id="bonus" min="0" max="5"></label>
+
+        <button type="button" onclick="calculateScore()">Submit & Download PDF</button>
+    </form>
+    <button type="button" onclick="resetForm()">Reset</button>
+</div>
+        
         <!-- Copyright footer -->
         <footer>
             © <span id="year"></span>, lord rowley inc. all rights reserved
@@ -316,43 +348,43 @@
 
                 const answers = [
                     "hotter than a summer day in the desert", "she’s a certified heart-stopper!", 
-"so fine, she’s got traffic slowing down", "turning heads like she owns the place", 
-"enough to make the stars jealous", "she’s a 12 out of 10, no debate", 
-"so stunning, even the mirror’s speechless", "a total knockout, lights out gorgeous", 
-"so hot, she’s practically on fire", "she’s got the whole room sweating", 
-"drop-dead gorgeous – it’s a health hazard", "she’s got the kind of beauty that could launch a thousand ships", 
-"she’s turning this place into a runway", "so beautiful, she could make angels cry", 
-"she’s a walking masterpiece", "a goddess walking among mere mortals", 
-"she’s got beauty that makes the sun come out early", "so fine, she’s rewriting the definition of beauty", 
-"so hot, she’s melting my screen", "her beauty is lethal, handle with care", 
-"she’s the reason hearts skip a beat", "like a supermodel but better", 
-"she’s got more curves than a racetrack", "too hot to handle, too cool to ignore", 
-"so gorgeous, she’s breaking all the hearts", "she could stop traffic with just a glance", 
-"she’s a beauty, and everyone else is just trying to keep up", "she’s got that ‘wow’ factor – no competition", 
-"her beauty is like a work of art – timeless", "if beauty had a name, it would be hers", 
-"she’s hotter than a fresh pizza out of the oven", "so stunning, I forgot how to breathe", 
-"she’s a queen – all hail her majesty!", "her beauty could make a volcano blush", 
-"she’s a walking daydream", "a sight for sore eyes and a joy to behold", 
-"so fine, even the moon takes notes", "so dazzling, even the stars dim in comparison", 
-"she’s the human definition of breathtaking", "that face belongs in a gallery", 
-"so gorgeous, she’s got people double-taking", "beauty this good should be illegal", 
-"she’s got the kind of beauty that could start a revolution", "her beauty deserves its own fan club", 
-"she’s got everyone else looking basic", "she’s a total smoke show", 
-"if looks could kill, she’d be unstoppable", "so stunning, she’s got people forgetting their own names"
-, "most definitely!", "she sure is!", "no doubt about it!", "as beautiful as the sunrise", 
-"you bet she is!", "without question!", "it's a fact!", "a vision of beauty!", 
-"oh, for sure!", "you already knew that!", "beyond compare!", "an angel on earth!", 
-"every single time!", "stunning beyond belief!", "like a goddess!", "beauty personified!",
-"are you kidding? of course!", "a masterpiece!", "perfection in human form!", "obviously, yes!", 
-"more beautiful every day!", "couldn’t be more radiant!", "divinely beautiful!", 
-"she's a walking work of art!", "out of this world beautiful!", "flawlessly gorgeous!", 
-"beauty knows no bounds with her!", "she’s beauty, she’s grace!", "of course!", "absolutely!", "duh!", "yup!", "always!", 
-"no doubt!", "don't be a dummy!", "you bet!", "heck yeah!", "without a doubt", "no question!", "the most beautiful", 
-"as if you had to ask", "definitely!", "you already know, hoe", "no question", "for sure!", "why wouldn't she be?", 
-"like always", "100%! ", "it's a given!", "uh, yeah", "beyond any doubt!", "more than ever!", 
-"couldn't be otherwise!", "all day, every day!", "it's obvious!", "oh, absolutely!", "mhm, what else is new?", 
-"yes, yes, and yes again!", "true story!", "just look at her!", "like, obviously!", "you know it!", 
-"how could she not be?", "beautiful as always!", "every single day!", "she's stunning", "'S' for shut up bc yes she is"
+                    "so fine, she’s got traffic slowing down", "turning heads like she owns the place", 
+                    "enough to make the stars jealous", "she’s a 12 out of 10, no debate", 
+                    "so stunning, even the mirror’s speechless", "a total knockout, lights out gorgeous", 
+                    "so hot, she’s practically on fire", "she’s got the whole room sweating", 
+                    "drop-dead gorgeous – it’s a health hazard", "she’s got the kind of beauty that could launch a thousand ships", 
+                    "she’s turning this place into a runway", "so beautiful, she could make angels cry", 
+                    "she’s a walking masterpiece", "a goddess walking among mere mortals", 
+                    "she’s got beauty that makes the sun come out early", "so fine, she’s rewriting the definition of beauty", 
+                    "so hot, she’s melting my screen", "her beauty is lethal, handle with care", 
+                    "she’s the reason hearts skip a beat", "like a supermodel but better", 
+                    "she’s got more curves than a racetrack", "too hot to handle, too cool to ignore", 
+                    "so gorgeous, she’s breaking all the hearts", "she could stop traffic with just a glance", 
+                    "she’s a beauty, and everyone else is just trying to keep up", "she’s got that ‘wow’ factor – no competition", 
+                    "her beauty is like a work of art – timeless", "if beauty had a name, it would be hers", 
+                    "she’s hotter than a fresh pizza out of the oven", "so stunning, I forgot how to breathe", 
+                    "she’s a queen – all hail her majesty!", "her beauty could make a volcano blush", 
+                    "she’s a walking daydream", "a sight for sore eyes and a joy to behold", 
+                    "so fine, even the moon takes notes", "so dazzling, even the stars dim in comparison", 
+                    "she’s the human definition of breathtaking", "that face belongs in a gallery", 
+                    "so gorgeous, she’s got people double-taking", "beauty this good should be illegal", 
+                    "she’s got the kind of beauty that could start a revolution", "her beauty deserves its own fan club", 
+                    "she’s got everyone else looking basic", "she’s a total smoke show", 
+                    "if looks could kill, she’d be unstoppable", "so stunning, she’s got people forgetting their own names",
+                    "most definitely!", "she sure is!", "no doubt about it!", "as beautiful as the sunrise", 
+                    "you bet she is!", "without question!", "it's a fact!", "a vision of beauty!", 
+                    "oh, for sure!", "you already knew that!", "beyond compare!", "an angel on earth!", 
+                    "every single time!", "stunning beyond belief!", "like a goddess!", "beauty personified!",
+                    "are you kidding? of course!", "a masterpiece!", "perfection in human form!", "obviously, yes!", 
+                    "more beautiful every day!", "couldn’t be more radiant!", "divinely beautiful!", 
+                    "she's a walking work of art!", "out of this world beautiful!", "flawlessly gorgeous!", 
+                    "beauty knows no bounds with her!", "she’s beauty, she’s grace!", "of course!", "absolutely!", "duh!", "yup!", "always!", 
+                    "no doubt!", "don't be a dummy!", "you bet!", "heck yeah!", "without a doubt", "no question!", "the most beautiful", 
+                    "as if you had to ask", "definitely!", "you already know, hoe", "no question", "for sure!", "why wouldn't she be?", 
+                    "like always", "100%! ", "it's a given!", "uh, yeah", "beyond any doubt!", "more than ever!", 
+                    "couldn't be otherwise!", "all day, every day!", "it's obvious!", "oh, absolutely!", "mhm, what else is new?", 
+                    "yes, yes, and yes again!", "true story!", "just look at her!", "like, obviously!", "you know it!", 
+                    "how could she not be?", "beautiful as always!", "every single day!", "she's stunning", "'S' for shut up bc yes she is"
                 ];
                 document.getElementById("answer").innerText = getRandomItem(answers);
             }, 6000);
@@ -449,6 +481,41 @@
             localStorage.setItem('slapCount', slapCount);
             document.getElementById('slapCounter').innerText = `Slaps: ${slapCount}`;
         });
+
+        function calculateScore() {
+    const sweetTaste = parseInt(document.getElementById('sweet-taste').value) || 0;
+    const sweetTexture = parseInt(document.getElementById('sweet-texture').value) || 0;
+    const costEfficiency = parseInt(document.getElementById('cost-range').value);
+    const bonus = parseInt(document.getElementById('bonus').value) || 0;
+
+    const subtotal = sweetTaste + sweetTexture + costEfficiency + bonus;
+    const finalScore = subtotal / 2;
+
+    const results = {
+        subtotal,
+        finalScore
+    };
+
+    saveResults(results);
+    generatePDF(results);
+}
+
+function saveResults(results) {
+    localStorage.setItem('bagelWarsResults', JSON.stringify(results));
+}
+
+function generatePDF(results) {
+    const doc = new jsPDF();
+    doc.text(`Bagel Wars Results`, 10, 10);
+    doc.text(`Subtotal: ${results.subtotal}/200`, 10, 20);
+    doc.text(`Final Score: ${results.finalScore}/100`, 10, 30);
+    doc.save('Bagel_Wars_Results.pdf');
+}
+
+function resetForm() {
+    document.getElementById('bagel-form').reset();
+}
+
     </script>
 </body>
 </html>
