@@ -174,7 +174,6 @@
             margin-top: 20px;
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <div id="page-wrapper">
@@ -182,7 +181,6 @@
         <a href="#" id="home-link" class="nav-link" onclick="showSection('start'); return false;">return home</a>
         <a href="#" id="beautiful-link" class="nav-link" onclick="showSection('main'); return false;">is sarah beautiful?</a>
         <a href="#" id="affirmation-link" class="nav-link" onclick="showSection('affirmations'); return false;">affirmations</a>
-        <a href="#" id="bagel-wars-link" class="nav-link" onclick="showSection('bagel-wars'); return false;">bagel wars</a>
 
         <!-- Home Section -->
         <div id="start" class="content">
@@ -218,27 +216,6 @@
             <div id="affirmationText"></div>
             <div id="slapCounter">Slaps: 0</div> <!-- Slap counter -->
         </div>
-        
-        <!-- Bagel Wars Section -->
-<div id="bagel-wars" class="content">
-    <h1>Bagel Wars</h1>
-    <form id="bagel-form">
-        <table>
-            <tr><th>Shop</th><th>Taste</th><th>Texture</th><th>Service</th><th>Score</th></tr>
-            <tr>
-                <td><input type="text" name="shop" required></td>
-                <td><input type="number" name="taste" min="1" max="10" required></td>
-                <td><input type="number" name="texture" min="1" max="10" required></td>
-                <td><input type="number" name="service" min="1" max="10" required></td>
-                <td><input type="number" name="score" readonly></td>
-            </tr>
-        </table>
-        <button type="button" onclick="calculateScore()">Calculate</button>
-        <button type="button" onclick="saveScores()">Save</button>
-        <button type="button" onclick="exportPDF()">Export as PDF</button>
-    </form>
-    <div id="saved-scores"></div>
-</div>
 
         <!-- Copyright footer -->
         <footer>
@@ -258,9 +235,7 @@
             document.getElementById("loader").style.display = "none";
             document.getElementById("result").style.display = "none";
             document.getElementById("affirmations").style.display = "none";
-    document.querySelectorAll('.content').forEach(section => section.style.display = 'none');
-    document.getElementById(sectionId).style.display = 'block';
-}
+
             // Show the selected section
             document.getElementById(sectionId).style.display = "block";
 
@@ -274,39 +249,11 @@
                 document.getElementById("beautiful-link").style.display = "block";
                 document.getElementById("affirmation-link").style.display = "block";
             }
-        
-function calculateScore() {
-    const form = document.getElementById('bagel-form');
-    const taste = parseInt(form.taste.value);
-    const texture = parseInt(form.texture.value);
-    const service = parseInt(form.service.value);
-    if (!isNaN(taste) && !isNaN(texture) && !isNaN(service)) {
-        form.score.value = ((taste + texture + service) / 3).toFixed(2);
-    }
-}
+        }
 
-function saveScores() {
-    const data = new FormData(document.getElementById('bagel-form'));
-    const scores = JSON.parse(localStorage.getItem('bagelScores')) || [];
-    scores.push(Object.fromEntries(data));
-    localStorage.setItem('bagelScores', JSON.stringify(scores));
-    displayScores();
-}
-
-function displayScores() {
-    const scores = JSON.parse(localStorage.getItem('bagelScores')) || [];
-    const savedScores = document.getElementById('saved-scores');
-    savedScores.innerHTML = scores.map(score => `<p>${score.shop}: ${score.score} points</p>`).join('');
-}
-
-function exportPDF() {
-    const element = document.getElementById('bagel-form');
-    html2pdf().from(element).save('BagelWars.pdf');
-}
         // Hide tabs on the initial load of the home page
         window.onload = function() {
-            displayScores(); // Display saved Bagel Wars scores on load
-    showSection('start'); // Start on the home section
+            showSection('start');
         };
 
         // Handle enter button
